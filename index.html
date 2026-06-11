@@ -2,409 +2,600 @@
 <html lang="it">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dopamina Smash Burger | Il Vero Smash Burger a Salerno</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 
-  <!-- SEO Meta Tags -->
-  <meta name="description"
-    content="Vivi l'esperienza del vero smash burger americano a Salerno. Assaggia il Dopiadose o l'Hot Smash Jam con crosticina Maillard e ingredienti artigianali. Valutazione 4.8.">
-  <meta name="keywords"
-    content="Smash Burger, Salerno, Dopamina Burger, Hamburgeria Salerno, Dopiadose, Hot Smash Jam, Cibo Salerno">
-  <meta name="author" content="Dopamina Smash Burger">
+    <!-- SEO Meta Tags -->
+    <title>Dopamina Smash Burger - Start Your Trip. Smash Your Brain.</title>
+    <meta name="description"
+        content="Il miglior smash burger di Salerno. Carne selezionata, crosticina croccante (reazione di Maillard) e ingredienti di prima scelta. Ordina ora delivery o vieni a trovarci!">
+    <meta name="keywords" content="smash burger, hamburger, salerno, dopamina, delivery, maillard, street food">
+    <meta name="author" content="Dopamina Smash Burger">
 
-  <!-- Open Graph / Facebook -->
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://dopaminasmashburger.it/">
-  <meta property="og:title" content="Dopamina Smash Burger | Il Vero Smash Burger a Salerno">
-  <meta property="og:description"
-    content="L'hamburgeria americana a Salerno con crosticina Maillard perfetta, bun artigianale soffice e patatine croccanti.">
-  <meta property="og:image" content="assets/food/BurgerDoppiaDose.png">
+    <!-- OpenGraph (Facebook/Instagram/WhatsApp sharing) -->
+    <meta property="og:title" content="Dopamina Smash Burger - Salerno">
+    <meta property="og:description"
+        content="Start Your Trip. Smash Your Brain. Scopri il vero smash burger a Salerno con ingredienti freschi e croccanti.">
+    <meta property="og:image" content="assets/food/BurgerOverDose.png">
+    <meta property="og:url" content="https://dopaminasmash.it">
+    <meta property="og:type" content="website">
 
-  <!-- Favicon -->
-  <link rel="icon" type="image/png" href="assets/menu/burger.png">
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="assets/icon.png">
 
-  <!-- CSS Link -->
-  <link rel="stylesheet" href="index.css">
+    <!-- Google Fonts: Space Mono (Regular & Bold) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+        rel="stylesheet">
+
+    <!-- Leaflet CSS for Monochrome styled map -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+
+    <!-- Core CSS -->
+    <link rel="stylesheet" href="index.css">
 </head>
 
 <body>
 
-  <!-- ==========================================
-       HEADER (Sticky Navbar)
-       ========================================== -->
-  <header class="header" id="main-header">
-    <div class="container header-container">
-      <!-- Left: Logo -->
-      <a href="#hero" class="logo-link" id="nav-logo" aria-label="Dopamina Home">
-        <!-- SVG Inline from assets/Logo.svg -->
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 504.58 132.1" aria-hidden="true" class="logo-svg">
-          <g fill="currentColor">
-            <g>
-              <path
-                d="M44.62,42.87V14.57h17.4v51.92c0,14.15-10.33,24.48-24.48,24.48h-11.09c-14.15,0-24.48-10.33-24.48-24.48v-12.91c0-13.58,9.66-22.85,23.23-22.85,8.99,0,16.06,5.07,19.41,12.14ZM19.76,60.94c0,6.88,5.35,12.24,12.24,12.24s12.24-5.35,12.24-12.24-5.35-12.24-12.24-12.24-12.24,5.35-12.24,12.24Z">
-              </path>
-              <path
-                d="M66.9,66.49v-11.09c0-14.15,10.33-24.48,24.48-24.48h11.09c14.15,0,24.48,10.33,24.48,24.48v11.09c0,14.06-10.33,24.48-24.48,24.48h-11.09c-14.15,0-24.48-10.42-24.48-24.48ZM109.16,60.94c0-6.88-5.35-12.24-12.24-12.24s-12.24,5.35-12.24,12.24,5.35,12.24,12.24,12.24,12.24-5.35,12.24-12.24Z">
-              </path>
-              <path
-                d="M195.88,68.3v-12.91c0-14.15,10.33-24.48,24.48-24.48h11.09c14.15,0,24.48,10.33,24.48,24.48v35.38h-17.4v-11.76c-3.35,7.08-10.42,12.14-19.41,12.14-13.58,0-23.23-9.27-23.23-22.85ZM238.14,60.94c0-6.88-5.35-12.24-12.24-12.24s-12.24,5.35-12.24,12.24,5.35,12.24,12.24,12.24,12.24-5.35,12.24-12.24Z">
-              </path>
-              <path
-                d="M260.52,53.1c0-13.19,11.28-22.18,24.48-22.18h4.4c9.94,0,18.74,5.07,22.47,13.19,2.68-8.03,10.33-13.39,19.51-13.39,12.05,0,21.32,8.51,21.32,20.56v39.49h-20.46v-32.13c0-5.35-3.82-9.18-9.18-9.18s-9.18,3.82-9.18,9.18v32.13h-20.46v-32.13c0-5.35-3.82-9.18-9.18-9.18s-9.18,3.82-9.18,9.18v32.13h-14.53v-37.67Z">
-              </path>
-              <path
-                d="M355.65,14.09c0-7.17,5.45-12.62,12.62-12.62s12.62,5.45,12.62,12.62-5.45,12.62-12.62,12.62-12.62-5.45-12.62-12.62ZM358.04,31.11h20.46v59.66h-20.46V31.11Z">
-              </path>
-              <path
-                d="M383.86,53.1c0-13.19,11.28-22.18,24.48-22.18h4.4c13.19,0,24.48,8.99,24.48,22.18v37.67h-20.46v-32.13c0-5.35-3.82-9.18-9.18-9.18s-9.18,3.82-9.18,9.18v32.13h-14.53v-37.67Z">
-              </path>
-              <path
-                d="M441.61,68.3v-12.91c0-14.15,10.33-24.48,24.48-24.48h11.09c14.15,0,24.48,10.33,24.48,24.48v35.38h-17.4v-11.76c-3.35,7.08-10.42,12.14-19.41,12.14-13.58,0-23.23-9.27-23.23-22.85ZM483.87,60.94c0-6.88-5.35-12.24-12.24-12.24s-12.24,5.35-12.24,12.24,5.35,12.24,12.24,12.24,12.24-5.35,12.24-12.24Z">
-              </path>
-            </g>
-            <path
-              d="M149.03,79.01v28.3h-17.4v-51.92c0-14.15,10.33-24.48,24.48-24.48h11.09c14.15,0,24.48,10.33,24.48,24.48v12.91c0,13.58-9.66,22.85-23.23,22.85-8.99,0-16.06-5.07-19.41-12.14ZM173.89,60.94c0-6.88-5.35-12.24-12.24-12.24s-12.24,5.35-12.24,12.24,5.35,12.24,12.24,12.24,12.24-5.35,12.24-12.24Z">
-            </path>
-            <path
-              d="M266.82,124.9c-1.49,0-2.7-.26-3.63-.77-.93-.51-1.61-1.17-2.03-1.98-.42-.81-.63-1.66-.63-2.55v-.35c0-.12.01-.24.03-.35l2.6-.33c-.02.16-.03.26-.03.32v.22c0,.96.31,1.76.93,2.42.62.66,1.71.98,3.27.98.69,0,1.39-.11,2.1-.33.71-.22,1.31-.56,1.78-1.02.48-.46.72-1.05.72-1.78,0-.87-.35-1.46-1.05-1.77-.7-.31-1.74-.51-3.12-.6-1.56-.11-2.79-.49-3.7-1.15-.91-.66-1.37-1.66-1.37-3.02,0-1.04.29-1.97.87-2.78.58-.81,1.39-1.45,2.43-1.92,1.04-.47,2.27-.7,3.67-.7s2.5.23,3.37.7c.87.47,1.51,1.06,1.92,1.78.41.72.62,1.48.62,2.28v.37l-2.57.37c.02-.18.03-.3.03-.37,0-.84-.32-1.52-.95-2.03-.63-.51-1.55-.77-2.75-.77-.6,0-1.21.1-1.83.3-.62.2-1.14.5-1.55.9-.41.4-.62.91-.62,1.53,0,.71.32,1.24.95,1.6.63.36,1.73.59,3.28.7,1.58.11,2.81.51,3.7,1.2.89.69,1.33,1.7,1.33,3.03,0,1.24-.33,2.31-1,3.18-.67.88-1.58,1.55-2.75,2-1.17.46-2.51.68-4.02.68Z">
-            </path>
-            <path
-              d="M294.92,124.9c-.64,0-1.25-.18-1.82-.55-.57-.37-.85-.98-.85-1.85,0-.11,0-.23.02-.35.01-.12.03-.23.05-.32l2.07-9.8c.02-.11.04-.22.05-.32.01-.1.02-.19.02-.28,0-.44-.12-.81-.37-1.1-.24-.29-.62-.43-1.13-.43-.62,0-1.12.22-1.5.67-.38.44-.66,1.07-.83,1.87l-2.57,12h-2.6l2.63-12.4c.02-.09.04-.19.05-.3.01-.11.02-.24.02-.4,0-.4-.11-.74-.32-1.02-.21-.28-.59-.42-1.15-.42-.69,0-1.22.26-1.58.77-.37.51-.63,1.1-.78,1.77l-2.57,12h-2.57l3.5-16.53h2.6l-.3,1.4h.4c.24-.64.62-1.12,1.13-1.42.51-.3,1.08-.45,1.7-.45.69,0,1.25.17,1.68.5.43.33.71.79.82,1.37h.4c.31-.6.72-1.06,1.22-1.38.5-.32,1.09-.48,1.78-.48.98,0,1.73.29,2.25.88.52.59.78,1.36.78,2.32,0,.2-.01.42-.03.65-.02.23-.06.44-.1.62l-2.13,9.93c-.07.36.07.53.4.53.13,0,.26-.04.37-.13l1.4-1.03,1.4,1.97-1.5,1.13c-.56.4-1.23.6-2.03.6Z">
-            </path>
-            <path
-              d="M305.05,124.9c-1.78,0-3.18-.61-4.2-1.83-1.02-1.22-1.53-2.81-1.53-4.77,0-1.4.19-2.75.58-4.05.39-1.3.97-2.46,1.75-3.48.78-1.02,1.73-1.83,2.87-2.43,1.13-.6,2.44-.9,3.93-.9,1.13,0,2.11.26,2.92.78.81.52,1.33,1.28,1.55,2.28h.4l.53-2.6h2.6l-2.93,13.73c-.04.2-.02.35.07.45.09.1.21.15.37.15s.31-.06.47-.17l1.2-.87,1.4,1.97-1.5,1.13c-.56.4-1.23.6-2.03.6-.64,0-1.25-.18-1.82-.55-.57-.37-.85-.98-.85-1.85,0-.11,0-.22.02-.33.01-.11.03-.22.05-.33h-.4c-.69,1.16-1.51,1.96-2.45,2.4-.94.44-1.94.67-2.98.67ZM305.85,122.43c1.2,0,2.29-.35,3.27-1.05.98-.7,1.76-1.66,2.33-2.87.58-1.21.87-2.56.87-4.05,0-1.38-.31-2.48-.93-3.32-.62-.83-1.59-1.25-2.9-1.25-1.38,0-2.54.38-3.5,1.13-.96.76-1.68,1.75-2.18,2.98-.5,1.23-.75,2.55-.75,3.95,0,2.98,1.27,4.47,3.8,4.47Z">
-            </path>
-            <path
-              d="M328.02,124.9c-1.49,0-2.7-.26-3.63-.77-.93-.51-1.61-1.17-2.03-1.98-.42-.81-.63-1.66-.63-2.55v-.35c0-.12.01-.24.03-.35l2.6-.33c-.02.16-.03.26-.03.32v.22c0,.96.31,1.76.93,2.42.62.66,1.71.98,3.27.98.69,0,1.39-.11,2.1-.33.71-.22,1.31-.56,1.78-1.02.48-.46.72-1.05.72-1.78,0-.87-.35-1.46-1.05-1.77-.7-.31-1.74-.51-3.12-.6-1.56-.11-2.79-.49-3.7-1.15-.91-.66-1.37-1.66-1.37-3.02,0-1.04.29-1.97.87-2.78.58-.81,1.39-1.45,2.43-1.92,1.04-.47,2.27-.7,3.67-.7s2.5.23,3.37.7c.87.47,1.51,1.06,1.92,1.78.41.72.62,1.48.62,2.28v.37l-2.57.37c.02-.18.03-.3.03-.37,0-.84-.32-1.52-.95-2.03-.63-.51-1.55-.77-2.75-.77-.6,0-1.21.1-1.83.3-.62.2-1.14.5-1.55.9-.41.4-.62.91-.62,1.53,0,.71.32,1.24.95,1.6.63.36,1.73.59,3.28.7,1.58.11,2.81.51,3.7,1.2.89.69,1.33,1.7,1.33,3.03,0,1.24-.33,2.31-1,3.18-.67.88-1.58,1.55-2.75,2-1.17.46-2.51.68-4.02.68Z">
-            </path>
-            <path
-              d="M354.95,124.9c-.69,0-1.29-.2-1.82-.6-.52-.4-.78-1.02-.78-1.87,0-.24.03-.53.1-.87l1.53-6.93c.07-.31.12-.59.15-.83.03-.24.05-.48.05-.7,0-1.16-.34-1.98-1.02-2.47-.68-.49-1.52-.73-2.52-.73-1.49,0-2.73.54-3.73,1.62-1,1.08-1.69,2.52-2.07,4.32l-1.83,8.6h-2.57l5.07-23.8h2.5l-2,9.73h.4c.56-1.04,1.28-1.79,2.18-2.25.9-.46,1.89-.68,2.98-.68,1.47,0,2.68.46,3.65,1.38.97.92,1.45,2.22,1.45,3.88,0,.33-.02.68-.05,1.03-.03.36-.09.72-.18,1.1l-1.47,6.97c-.07.33.08.5.43.5.13,0,.27-.06.4-.17l1.3-.93,1.4,1.97-1.53,1.1c-.6.42-1.28.63-2.03.63Z">
-            </path>
-            <path
-              d="M390.12,124.9c-1.02,0-2.01-.25-2.95-.75-.94-.5-1.59-1.25-1.95-2.25h-.4l-.53,2.53h-2.57l5.03-23.8h2.57l-2.1,9.87h.4c.62-.91,1.43-1.65,2.42-2.22.99-.57,2.13-.85,3.42-.85,1.16,0,2.19.27,3.1.8.91.53,1.63,1.28,2.17,2.23.53.96.8,2.08.8,3.37,0,2.27-.42,4.23-1.25,5.88-.83,1.66-1.96,2.93-3.38,3.83-1.42.9-3.01,1.35-4.77,1.35ZM390.05,122.43c1.22,0,2.34-.34,3.37-1.02,1.02-.68,1.84-1.63,2.45-2.85.61-1.22.92-2.63.92-4.23,0-1.36-.36-2.43-1.08-3.23-.72-.8-1.75-1.2-3.08-1.2s-2.44.37-3.45,1.1c-1.01.73-1.81,1.7-2.4,2.9-.59,1.2-.88,2.51-.88,3.93s.37,2.6,1.12,3.4c.74.8,1.76,1.2,3.05,1.2Z">
-            </path>
-            <path
-              d="M406.98,124.9c-1.44,0-2.63-.42-3.55-1.27-.92-.84-1.38-2.08-1.38-3.7,0-.33.02-.67.07-1.02.04-.34.11-.73.2-1.15l2.2-9.87h2.6l-2.13,9.53c-.16.69-.23,1.33-.23,1.93,0,2.04,1.1,3.07,3.3,3.07,1.53,0,2.84-.54,3.92-1.62,1.08-1.08,1.82-2.52,2.22-4.32l1.93-8.6h2.6l-3.03,13.73c-.04.18-.02.32.07.43.09.11.21.17.37.17s.31-.06.47-.17l1.43-1.03,1.4,1.93-1.67,1.27c-.27.22-.59.39-.98.5-.39.11-.78.17-1.18.17-.64,0-1.24-.19-1.78-.57-.54-.38-.82-.99-.82-1.83,0-.11,0-.22.02-.33.01-.11.03-.22.05-.33l.03-.2h-.4c-.6,1.07-1.37,1.88-2.3,2.43-.93.56-2.07.83-3.4.83Z">
-            </path>
-            <path
-              d="M421.32,124.43v-2.4h4.07l2.4-11.27c.07-.27.03-.47-.1-.62-.13-.14-.3-.22-.5-.22-.16,0-.32.06-.5.17l-3.03,2.07-1.33-1.97,2.97-2c.76-.51,1.52-.77,2.3-.77.69,0,1.29.19,1.8.58.51.39.8,1.02.87,1.88h.4c.64-.91,1.37-1.55,2.17-1.92.8-.37,1.63-.55,2.5-.55,1.58,0,2.83.46,3.75,1.38.92.92,1.38,2.14,1.38,3.65,0,.58-.07,1.17-.2,1.77l-2.83.2c.04-.24.08-.48.12-.72s.05-.46.05-.68c0-1.07-.3-1.86-.9-2.37-.6-.51-1.36-.77-2.27-.77s-1.67.22-2.33.65c-.67.43-1.21,1.01-1.63,1.73-.42.72-.72,1.51-.9,2.35l-1.57,7.4h3.93v2.4h-10.6Z">
-            </path>
-            <path
-              d="M442.92,131.1v-2.4h9.63c.62,0,1-.33,1.13-1l1.2-5.6h-.4c-.64.93-1.45,1.63-2.42,2.1s-2.03.7-3.18.7c-1.27,0-2.38-.28-3.33-.83-.96-.56-1.7-1.33-2.23-2.33s-.8-2.17-.8-3.5c0-2.04.4-3.88,1.2-5.52.8-1.63,1.91-2.92,3.33-3.87,1.42-.94,3.07-1.42,4.93-1.42,1.31,0,2.39.28,3.25.85.86.57,1.42,1.31,1.68,2.22h.4l.57-2.6h2.6l-4.37,20.6c-.16.76-.53,1.38-1.12,1.87-.59.49-1.26.73-2.02.73h-10.07ZM449.45,122.43c1.02,0,1.96-.23,2.8-.68.84-.46,1.57-1.06,2.18-1.82.61-.76,1.08-1.61,1.42-2.55.33-.94.5-1.91.5-2.88,0-1.38-.39-2.49-1.17-3.33-.78-.84-1.82-1.27-3.13-1.27-1.4,0-2.61.38-3.63,1.13-1.02.76-1.81,1.75-2.37,2.98-.56,1.23-.83,2.55-.83,3.95s.37,2.44,1.1,3.25c.73.81,1.78,1.22,3.13,1.22Z">
-            </path>
-            <path
-              d="M469.99,124.9c-1.31,0-2.48-.26-3.52-.78-1.03-.52-1.84-1.28-2.42-2.28-.58-1-.87-2.19-.87-3.57s.22-2.74.67-4.03c.44-1.29,1.09-2.44,1.95-3.47.86-1.02,1.9-1.83,3.13-2.43s2.64-.9,4.22-.9c1.49,0,2.72.29,3.68.88.97.59,1.68,1.36,2.15,2.32.47.96.7,1.97.7,3.03,0,.58-.07,1.16-.2,1.73l-.37,1.57h-13.27c-.02.18-.05.38-.08.6-.03.22-.05.46-.05.7,0,1.22.36,2.23,1.07,3.02.71.79,1.84,1.18,3.4,1.18s2.81-.34,3.68-1.02c.88-.68,1.53-1.48,1.95-2.42l2.13,1.2c-.42.87-.98,1.66-1.67,2.37-.69.71-1.54,1.27-2.57,1.68-1.02.41-2.27.62-3.73.62ZM466.42,114.57h10.6c.07-.38.1-.71.1-1,0-1.2-.41-2.11-1.23-2.73-.82-.62-1.84-.93-3.07-.93-1.56,0-2.9.44-4.03,1.33-1.13.89-1.92,2-2.37,3.33Z">
-            </path>
-            <path
-              d="M482.52,124.43v-2.4h4.07l2.4-11.27c.07-.27.03-.47-.1-.62-.13-.14-.3-.22-.5-.22-.16,0-.32.06-.5.17l-3.03,2.07-1.33-1.97,2.97-2c.76-.51,1.52-.77,2.3-.77.69,0,1.29.19,1.8.58.51.39.8,1.02.87,1.88h.4c.64-.91,1.37-1.55,2.17-1.92.8-.37,1.63-.55,2.5-.55,1.58,0,2.83.46,3.75,1.38.92.92,1.38,2.14,1.38,3.65,0,.58-.07,1.17-.2,1.77l-2.83.2c.04-.24.08-.48.12-.72s.05-.46.05-.68c0-1.07-.3-1.86-.9-2.37-.6-.51-1.36-.77-2.27-.77s-1.67.22-2.33.65c-.67.43-1.21,1.01-1.63,1.73-.42.72-.72,1.51-.9,2.35l-1.57,7.4h3.93v2.4h-10.6Z">
-            </path>
-          </g>
-        </svg>
-      </a>
+    <!-- Red Trippy Watermark Pattern (Dynamic Watermark Lines) -->
+    <div class="trippy-watermark-container" id="watermark"></div>
 
-      <!-- Center: Navigation (Desktop only) -->
-      <nav class="nav-desktop">
-        <a href="#concept" class="nav-link" data-translate="nav_concept">Concept</a>
-        <a href="#menu" class="nav-link" data-translate="nav_menu">Menu</a>
-        <a href="#reviews" class="nav-link" data-translate="nav_reviews">Recensioni</a>
-        <a href="#footer" class="nav-link" data-translate="nav_location">Dove Siamo</a>
-      </nav>
-
-      <!-- Right: Actions & Mobile Hamburger -->
-      <div class="header-actions">
-        <!-- Language Switcher button -->
-        <button class="lang-toggle" id="lang-toggle-btn" aria-label="Cambia Lingua / Switch Language">
-          <img src="assets/menu/english-menu.png" alt="Inglese / English" class="lang-icon" id="lang-toggle-icon">
-          <span id="lang-toggle-text">EN</span>
-        </button>
-
-        <!-- Hamburger Icon (Mobile only) -->
-        <button class="menu-hamburger" id="mobile-menu-btn" aria-label="Apri Menu Navigazione" aria-expanded="false"
-          aria-controls="mobile-nav">
-          <span></span>
-          <span></span>
-          <span></span>
-        </button>
-      </div>
-    </div>
-  </header>
-
-  <!-- Mobile Slide Navigation -->
-  <nav class="nav-mobile" id="mobile-nav" aria-hidden="true">
-    <a href="#concept" class="nav-link" data-translate="nav_concept">Concept</a>
-    <a href="#menu" class="nav-link" data-translate="nav_menu">Menu</a>
-    <a href="#reviews" class="nav-link" data-translate="nav_reviews">Recensioni</a>
-    <a href="#footer" class="nav-link" data-translate="nav_location">Dove Siamo</a>
-  </nav>
-
-  <!-- ==========================================
-       HERO SECTION (100vh)
-       ========================================== -->
-  <section class="hero" id="hero">
-    <div class="hero-bg">
-      <img src="assets/place/food.jpg" alt="Panini di punta Dopamina Smash Burger" class="hero-img">
-    </div>
-    <div class="hero-overlay"></div>
-    <div class="hero-content">
-      <h1 class="hero-title" data-translate="hero_title">START YOUR TRIP. SMASH YOUR BRAIN</h1>
-      <p class="hero-subtitle" data-translate="hero_subtitle">Il vero Smash Burger americano a Salerno.</p>
-      <a href="#menu" class="btn-cta" data-translate="hero_cta">Scopri il menu</a>
-    </div>
-  </section>
-
-  <!-- ==========================================
-       CONCEPT SECTION (La Scienza dello Smash)
-       ========================================== -->
-  <section class="concept section-padding" id="concept">
-    <div class="container concept-grid">
-      <!-- Left Column: Content -->
-      <div class="concept-content">
-        <h2 class="concept-title" id="concept-main-title">
-          <span data-translate="concept_title_prefix">La scienza dello </span><span class="neon-magenta">SMASH</span>
-        </h2>
-        <p class="concept-text" data-translate="concept_p1">
-          La magia dello smash burger sta tutta nella reazione di Maillard. Quando la polpetta di manzo freschissima
-          viene schiacciata con forza sulla piastra rovente, i succhi rimangono intrappolati all'interno mentre si forma
-          una crosticina croccante, saporita e irresistibile all'esterno.
-        </p>
-        <p class="concept-text" data-translate="concept_p2">
-          Adagiamo questa prelibatezza in un morbidissimo bun artigianale al burro (potato roll), arricchendola con
-          cetriolini fatti in casa e cipolle agrodolci bilanciate alla perfezione. Una vera e propria esplosione chimica
-          di piacere per il tuo palato.
-        </p>
-      </div>
-
-      <!-- Right Column: Image Detail -->
-      <div class="concept-image-container">
-        <img src="assets/place/BurgerPatate.jpg" alt="Vero smash burger Dopamina servito con patate croccanti"
-          class="concept-img">
-      </div>
-    </div>
-  </section>
-
-  <!-- ==========================================
-       GALLERY SECTION (L'Atmosfera di Dopamina)
-       ========================================== -->
-  <section class="gallery-section section-padding" id="gallery">
-    <div class="container">
-      <div class="concept-content" style="text-align: center; margin-bottom: 50px;">
-        <h2 class="concept-title" style="display: inline-block; position: relative; padding-bottom: 15px;">
-          <span data-translate="gallery_title">L'Esperienza Dopamina</span>
-        </h2>
-      </div>
-      <div class="gallery-grid">
-        <div class="gallery-item">
-          <img src="assets/place/place.jpg" alt="Entrata e cucina Dopamina Smash Burger" class="gallery-img"
-            loading="lazy">
-          <div class="gallery-caption">
-            <span class="caption-title" data-translate="caption_place">Il Locale</span>
-          </div>
-        </div>
-        <div class="gallery-item">
-          <img src="assets/place/Cooking.jpg" alt="Preparazione dei panini nella cucina a vista" class="gallery-img"
-            loading="lazy">
-          <div class="gallery-caption">
-            <span class="caption-title" data-translate="caption_cooking">Cucina a Vista</span>
-          </div>
-        </div>
-        <div class="gallery-item">
-          <img src="assets/place/BurgerPatate.jpg" alt="Smash burger reale servito con patatine fritte"
-            class="gallery-img" loading="lazy">
-          <div class="gallery-caption">
-            <span class="caption-title" data-translate="caption_burger">Il Vero Smash</span>
-          </div>
-        </div>
-        <div class="gallery-item">
-          <img src="assets/place/Busta.jpg" alt="Busta d'asporto Dopamina Smash Burger" class="gallery-img"
-            loading="lazy">
-          <div class="gallery-caption">
-            <span class="caption-title" data-translate="caption_packaging">Pronto al Trip</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ==========================================
-       MENU SECTION
-       ========================================== -->
-  <section class="menu-section section-padding" id="menu">
-    <div class="container">
-      <div class="menu-header">
-        <h2 class="menu-title" data-translate="menu_main_title">Il Menu</h2>
-      </div>
-
-      <!-- Category Filter Tabs -->
-      <div class="menu-tabs" id="menu-categories">
-        <button class="tab-btn active" data-category="smash">
-          <img src="assets/menu/burger.png" alt="Icona Burger" class="tab-icon">
-          <span>Smash</span>
-        </button>
-        <button class="tab-btn" data-category="chicken">
-          <img src="assets/menu/chicken.png" alt="Icona Chicken" class="tab-icon">
-          <span>Chicken</span>
-        </button>
-        <button class="tab-btn" data-category="veggie">
-          <img src="assets/menu/veggie.png" alt="Icona Veggie" class="tab-icon">
-          <span>Veggie</span>
-        </button>
-        <button class="tab-btn" data-category="fried">
-          <img src="assets/menu/fried.png" alt="Icona Fried" class="tab-icon">
-          <span>Fried</span>
-        </button>
-        <button class="tab-btn" data-category="dessert">
-          <img src="assets/menu/dessert.png" alt="Icona Dessert" class="tab-icon">
-          <span>Dessert</span>
-        </button>
-        <button class="tab-btn" data-category="drink">
-          <img src="assets/menu/drink.png" alt="Icona Drink" class="tab-icon">
-          <span>Drink</span>
-        </button>
-        <button class="tab-btn" data-category="extra">
-          <img src="assets/menu/extra.png" alt="Icona Extra" class="tab-icon">
-          <span>Extra</span>
-        </button>
-      </div>
-
-      <!-- Main Burgers / Selected Category Cards Grid -->
-      <div class="menu-grid" id="menu-items-grid">
-        <!-- Javascript will inject the cards securely here -->
-      </div>
-
-      <!-- Divider line -->
-      <hr class="menu-divider">
-
-      <!-- Sides Subsection (Contorni & Snacks) -->
-      <div class="sides-header">
-        <h3 class="sides-title" data-translate="sides_title">Contorni & Sfizi</h3>
-      </div>
-
-      <!-- Smaller grid for Fries, Nuggets & Snacks -->
-      <div class="menu-grid menu-grid-small" id="menu-sides-grid">
-        <!-- Javascript will inject the sides cards securely here -->
-      </div>
-    </div>
-  </section>
-
-  <!-- ==========================================
-       REVIEWS (SOCIAL PROOF) SECTION
-       ========================================== -->
-  <section class="reviews section-padding" id="reviews">
-    <div class="container">
-      <div class="reviews-header">
-        <h2 class="reviews-title" data-translate="reviews_title">La dipendenza dei nostri clienti</h2>
-      </div>
-
-      <!-- Carousel Container -->
-      <div class="reviews-slider-wrapper">
-        <div class="reviews-container" id="reviews-slider">
-          <!-- Javascript will inject the review cards securely here -->
-        </div>
-
-        <!-- Slider Arrow Navigation Controls -->
-        <div class="slider-controls">
-          <button class="slider-btn" id="slider-prev-btn" aria-label="Recensione Precedente">&larr;</button>
-          <button class="slider-btn" id="slider-next-btn" aria-label="Recensione Successiva">&rarr;</button>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ==========================================
-       FOOTER (CONTACTS, HOURS & MAP)
-       ========================================== -->
-  <footer class="footer" id="footer">
-    <div class="container">
-      <div class="footer-grid">
-        <!-- Left: Contacts & Opening Hours -->
-        <div class="footer-info">
-          <!-- Column: Opening Hours -->
-          <div class="info-col">
-            <h3 class="info-title" data-translate="hours_heading">Orari</h3>
-            <ul class="hours-list">
-              <li class="hours-row">
-                <span data-translate="day_monday">Lunedì</span>
-                <span>18:00 - 01:00</span>
-              </li>
-              <li class="hours-row">
-                <span data-translate="day_tue_thu">Martedì - Giovedì</span>
-                <span>12:00 - 01:00</span>
-              </li>
-              <!-- Friday and Saturday highlighted in Electric Yellow -->
-              <li class="hours-row highlight">
-                <span data-translate="day_fri_sat">Venerdì - Sabato</span>
-                <span>12:00 - 03:00</span>
-              </li>
-              <li class="hours-row">
-                <span data-translate="day_sunday">Domenica</span>
-                <span>12:00 - 01:00</span>
-              </li>
-            </ul>
-          </div>
-
-          <!-- Column: Where We Are & Call Out -->
-          <div class="info-col">
-            <h3 class="info-title" data-translate="location_heading">Dove Siamo</h3>
-            <p class="address-text">
-              <strong>Dopamina Smash Burger</strong><br>
-              Piazza Gioia Flavio, 2,<br>
-              84122 Salerno SA<br>
-              Italia
-            </p>
-            <!-- Call to action: Direct dial call -->
-            <a href="tel:+390899767868" class="btn-phone" id="call-now-btn">
-              <span data-translate="btn_call">Chiama Ora</span>
+    <!-- Header / Sticky Navigation -->
+    <header class="sticky-header" id="main-header">
+        <div class="header-container">
+            <a href="#" class="header-logo" id="logo-link" aria-label="Dopamina Home">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 504.58 132.1" aria-hidden="true" class="logo-svg">
+                    <g fill="currentColor">
+                        <g>
+                            <path
+                                d="M44.62,42.87V14.57h17.4v51.92c0,14.15-10.33,24.48-24.48,24.48h-11.09c-14.15,0-24.48-10.33-24.48-24.48v-12.91c0-13.58,9.66-22.85,23.23-22.85,8.99,0,16.06,5.07,19.41,12.14ZM19.76,60.94c0,6.88,5.35,12.24,12.24,12.24s12.24-5.35,12.24-12.24-5.35-12.24-12.24-12.24-12.24,5.35-12.24,12.24Z">
+                            </path>
+                            <path
+                                d="M66.9,66.49v-11.09c0-14.15,10.33-24.48,24.48-24.48h11.09c14.15,0,24.48,10.33,24.48,24.48v11.09c0,14.06-10.33,24.48-24.48,24.48h-11.09c-14.15,0-24.48-10.42-24.48-24.48ZM109.16,60.94c0-6.88-5.35-12.24-12.24-12.24s-12.24,5.35-12.24,12.24,5.35,12.24,12.24,12.24,12.24-5.35,12.24-12.24Z">
+                            </path>
+                            <path
+                                d="M195.88,68.3v-12.91c0-14.15,10.33-24.48,24.48-24.48h11.09c14.15,0,24.48,10.33,24.48,24.48v35.38h-17.4v-11.76c-3.35,7.08-10.42,12.14-19.41,12.14-13.58,0-23.23-9.27-23.23-22.85ZM238.14,60.94c0-6.88-5.35-12.24-12.24-12.24s-12.24,5.35-12.24,12.24,5.35,12.24,12.24,12.24,12.24-5.35,12.24-12.24Z">
+                            </path>
+                            <path
+                                d="M260.52,53.1c0-13.19,11.28-22.18,24.48-22.18h4.4c9.94,0,18.74,5.07,22.47,13.19,2.68-8.03,10.33-13.39,19.51-13.39,12.05,0,21.32,8.51,21.32,20.56v39.49h-20.46v-32.13c0-5.35-3.82-9.18-9.18-9.18s-9.18,3.82-9.18,9.18v32.13h-20.46v-32.13c0-5.35-3.82-9.18-9.18-9.18s-9.18,3.82-9.18,9.18v32.13h-14.53v-37.67Z">
+                            </path>
+                            <path
+                                d="M355.65,14.09c0-7.17,5.45-12.62,12.62-12.62s12.62,5.45,12.62,12.62-5.45,12.62-12.62,12.62-12.62-5.45-12.62-12.62ZM358.04,31.11h20.46v59.66h-20.46V31.11Z">
+                            </path>
+                            <path
+                                d="M383.86,53.1c0-13.19,11.28-22.18,24.48-22.18h4.4c13.19,0,24.48,8.99,24.48,22.18v37.67h-20.46v-32.13c0-5.35-3.82-9.18-9.18-9.18s-9.18,3.82-9.18,9.18v32.13h-14.53v-37.67Z">
+                            </path>
+                            <path
+                                d="M441.61,68.3v-12.91c0-14.15,10.33-24.48,24.48-24.48h11.09c14.15,0,24.48,10.33,24.48,24.48v35.38h-17.4v-11.76c-3.35,7.08-10.42,12.14-19.41,12.14-13.58,0-23.23-9.27-23.23-22.85ZM483.87,60.94c0-6.88-5.35-12.24-12.24-12.24s-12.24,5.35-12.24,12.24,5.35,12.24,12.24,12.24,12.24-5.35,12.24-12.24Z">
+                            </path>
+                        </g>
+                        <path
+                            d="M149.03,79.01v28.3h-17.4v-51.92c0-14.15,10.33-24.48,24.48-24.48h11.09c14.15,0,24.48,10.33,24.48,24.48v12.91c0,13.58-9.66,22.85-23.23,22.85-8.99,0-16.06-5.07-19.41-12.14ZM173.89,60.94c0-6.88-5.35-12.24-12.24-12.24s-12.24,5.35-12.24,12.24,5.35,12.24,12.24,12.24,12.24-5.35,12.24-12.24Z">
+                        </path>
+                        <path
+                            d="M266.82,124.9c-1.49,0-2.7-.26-3.63-.77-.93-.51-1.61-1.17-2.03-1.98-.42-.81-.63-1.66-.63-2.55v-.35c0-.12.01-.24.03-.35l2.6-.33c-.02.16-.03.26-.03.32v.22c0,.96.31,1.76.93,2.42.62.66,1.71.98,3.27.98.69,0,1.39-.11,2.1-.33.71-.22,1.31-.56,1.78-1.02.48-.46.72-1.05.72-1.78,0-.87-.35-1.46-1.05-1.77-.7-.31-1.74-.51-3.12-.6-1.56-.11-2.79-.49-3.7-1.15-.91-.66-1.37-1.66-1.37-3.02,0-1.04.29-1.97.87-2.78.58-.81,1.39-1.45,2.43-1.92,1.04-.47,2.27-.7,3.67-.7s2.5.23,3.37.7c.87.47,1.51,1.06,1.92,1.78.41.72.62,1.48.62,2.28v.37l-2.57.37c.02-.18.03-.3.03-.37,0-.84-.32-1.52-.95-2.03-.63-.51-1.55-.77-2.75-.77-.6,0-1.21.1-1.83.3-.62.2-1.14.5-1.55.9-.41.4-.62.91-.62,1.53,0,.71.32,1.24.95,1.6.63.36,1.73.59,3.28.7,1.58.11,2.81.51,3.7,1.2.89.69,1.33,1.7,1.33,3.03,0,1.24-.33,2.31-1,3.18-.67.88-1.58,1.55-2.75,2-1.17.46-2.51.68-4.02.68Z">
+                        </path>
+                        <path
+                            d="M294.92,124.9c-.64,0-1.25-.18-1.82-.55-.57-.37-.85-.98-.85-1.85,0-.11,0-.23.02-.35.01-.12.03-.23.05-.32l2.07-9.8c.02-.11.04-.22.05-.32.01-.1.02-.19.02-.28,0-.44-.12-.81-.37-1.1-.24-.29-.62-.43-1.13-.43-.62,0-1.12.22-1.5.67-.38.44-.66,1.07-.83,1.87l-2.57,12h-2.6l2.63-12.4c.02-.09.04-.19.05-.3.01-.11.02-.24.02-.4,0-.4-.11-.74-.32-1.02-.21-.28-.59-.42-1.15-.42-.69,0-1.22.26-1.58.77-.37.51-.63,1.1-.78,1.77l-2.57,12h-2.57l3.5-16.53h2.6l-.3,1.4h.4c.24-.64.62-1.12,1.13-1.42.51-.3,1.08-.45,1.7-.45.69,0,1.25.17,1.68.5.43.33.71.79.82,1.37h.4c.31-.6.72-1.06,1.22-1.38.5-.32,1.09-.48,1.78-.48.98,0,1.73.29,2.25.88.52.59.78,1.36.78,2.32,0,.2-.01.42-.03.65-.02.23-.06.44-.1.62l-2.13,9.93c-.07.36.07.53.4.53.13,0,.26-.04.37-.13l1.4-1.03,1.4,1.97-1.5,1.13c-.56.4-1.23.6-2.03.6Z">
+                        </path>
+                        <path
+                            d="M305.05,124.9c-1.78,0-3.18-.61-4.2-1.83-1.02-1.22-1.53-2.81-1.53-4.77,0-1.4.19-2.75.58-4.05.39-1.3.97-2.46,1.75-3.48.78-1.02,1.73-1.83,2.87-2.43,1.13-.6,2.44-.9,3.93-.9,1.13,0,2.11.26,2.92.78.81.52,1.33,1.28,1.55,2.28h.4l.53-2.6h2.6l-2.93,13.73c-.04.2-.02.35.07.45.09.1.21.15.37.15s.31-.06.47-.17l1.2-.87,1.4,1.97-1.5,1.13c-.56.4-1.23.6-2.03.6-.64,0-1.25-.18-1.82-.55-.57-.37-.85-.98-.85-1.85,0-.11,0-.22.02-.33.01-.11.03-.22.05-.33h-.4c-.69,1.16-1.51,1.96-2.45,2.4-.94.44-1.94.67-2.98.67ZM305.85,122.43c1.2,0,2.29-.35,3.27-1.05.98-.7,1.76-1.66,2.33-2.87.58-1.21.87-2.56.87-4.05,0-1.38-.31-2.48-.93-3.32-.62-.83-1.59-1.25-2.9-1.25-1.38,0-2.54.38-3.5,1.13-.96.76-1.68,1.75-2.18,2.98-.5,1.23-.75,2.55-.75,3.95,0,2.98,1.27,4.47,3.8,4.47Z">
+                        </path>
+                        <path
+                            d="M328.02,124.9c-1.49,0-2.7-.26-3.63-.77-.93-.51-1.61-1.17-2.03-1.98-.42-.81-.63-1.66-.63-2.55v-.35c0-.12.01-.24.03-.35l2.6-.33c-.02.16-.03.26-.03.32v.22c0,.96.31,1.76.93,2.42.62.66,1.71.98,3.27.98.69,0,1.39-.11,2.1-.33.71-.22,1.31-.56,1.78-1.02.48-.46.72-1.05.72-1.78,0-.87-.35-1.46-1.05-1.77-.7-.31-1.74-.51-3.12-.6-1.56-.11-2.79-.49-3.7-1.15-.91-.66-1.37-1.66-1.37-3.02,0-1.04.29-1.97.87-2.78.58-.81,1.39-1.45,2.43-1.92,1.04-.47,2.27-.7,3.67-.7s2.5.23,3.37.7c.87.47,1.51,1.06,1.92,1.78.41.72.62,1.48.62,2.28v.37l-2.57.37c.02-.18.03-.3.03-.37,0-.84-.32-1.52-.95-2.03-.63-.51-1.55-.77-2.75-.77-.6,0-1.21.1-1.83.3-.62.2-1.14.5-1.55.9-.41.4-.62.91-.62,1.53,0,.71.32,1.24.95,1.6.63.36,1.73.59,3.28.7,1.58.11,2.81.51,3.7,1.2.89.69,1.33,1.7,1.33,3.03,0,1.24-.33,2.31-1,3.18-.67.88-1.58,1.55-2.75,2-1.17.46-2.51.68-4.02.68Z">
+                        </path>
+                        <path
+                            d="M354.95,124.9c-.69,0-1.29-.2-1.82-.6-.52-.4-.78-1.02-.78-1.87,0-.24.03-.53.1-.87l1.53-6.93c.07-.31.12-.59.15-.83.03-.24.05-.48.05-.7,0-1.16-.34-1.98-1.02-2.47-.68-.49-1.52-.73-2.52-.73-1.49,0-2.73.54-3.73,1.62-1,1.08-1.69,2.52-2.07,4.32l-1.83,8.6h-2.57l5.07-23.8h2.5l-2,9.73h.4c.56-1.04,1.28-1.79,2.18-2.25.9-.46,1.89-.68,2.98-.68,1.47,0,2.68.46,3.65,1.38.97.92,1.45,2.22,1.45,3.88,0,.33-.02.68-.05,1.03-.03.36-.09.72-.18,1.1l-1.47,6.97c-.07.33.08.5.43.5.13,0,.27-.06.4-.17l1.3-.93,1.4,1.97-1.53,1.1c-.6.42-1.28.63-2.03.63Z">
+                        </path>
+                        <path
+                            d="M390.12,124.9c-1.02,0-2.01-.25-2.95-.75-.94-.5-1.59-1.25-1.95-2.25h-.4l-.53,2.53h-2.57l5.03-23.8h2.57l-2.1,9.87h.4c.62-.91,1.43-1.65,2.42-2.22.99-.57,2.13-.85,3.42-.85,1.16,0,2.19.27,3.1.8.91.53,1.63,1.28,2.17,2.23.53.96.8,2.08.8,3.37,0,2.27-.42,4.23-1.25,5.88-.83,1.66-1.96,2.93-3.38,3.83-1.42.9-3.01,1.35-4.77,1.35ZM390.05,122.43c1.22,0,2.34-.34,3.37-1.02,1.02-.68,1.84-1.63,2.45-2.85.61-1.22.92-2.63.92-4.23,0-1.36-.36-2.43-1.08-3.23-.72-.8-1.75-1.2-3.08-1.2s-2.44.37-3.45,1.1c-1.01.73-1.81,1.7-2.4,2.9-.59,1.2-.88,2.51-.88,3.93s.37,2.6,1.12,3.4c.74.8,1.76,1.2,3.05,1.2Z">
+                        </path>
+                        <path
+                            d="M406.98,124.9c-1.44,0-2.63-.42-3.55-1.27-.92-.84-1.38-2.08-1.38-3.7,0-.33.02-.67.07-1.02.04-.34.11-.73.2-1.15l2.2-9.87h2.6l-2.13,9.53c-.16.69-.23,1.33-.23,1.93,0,2.04,1.1,3.07,3.3,3.07,1.53,0,2.84-.54,3.92-1.62,1.08-1.08,1.82-2.52,2.22-4.32l1.93-8.6h2.6l-3.03,13.73c-.04.18-.02.32.07.43.09.11.21.17.37.17s.31-.06.47-.17l1.43-1.03,1.4,1.93-1.67,1.27c-.27.22-.59.39-.98.5-.39.11-.78.17-1.18.17-.64,0-1.24-.19-1.78-.57-.54-.38-.82-.99-.82-1.83,0-.11,0-.22.02-.33.01-.11.03-.22.05-.33l.03-.2h-.4c-.6,1.07-1.37,1.88-2.3,2.43-.93.56-2.07.83-3.4.83Z">
+                        </path>
+                        <path
+                            d="M421.32,124.43v-2.4h4.07l2.4-11.27c.07-.27.03-.47-.1-.62-.13-.14-.3-.22-.5-.22-.16,0-.32.06-.5.17l-3.03,2.07-1.33-1.97,2.97-2c.76-.51,1.52-.77,2.3-.77.69,0,1.29.19,1.8.58.51.39.8,1.02.87,1.88h.4c.64-.91,1.37-1.55,2.17-1.92.8-.37,1.63-.55,2.5-.55,1.58,0,2.83.46,3.75,1.38.92.92,1.38,2.14,1.38,3.65,0,.58-.07,1.17-.2,1.77l-2.83.2c.04-.24.08-.48.12-.72s.05-.46.05-.68c0-1.07-.3-1.86-.9-2.37-.6-.51-1.36-.77-2.27-.77s-1.67.22-2.33.65c-.67.43-1.21,1.01-1.63,1.73-.42.72-.72,1.51-.9,2.35l-1.57,7.4h3.93v2.4h-10.6Z">
+                        </path>
+                        <path
+                            d="M442.92,131.1v-2.4h9.63c.62,0,1-.33,1.13-1l1.2-5.6h-.4c-.64.93-1.45,1.63-2.42,2.1s-2.03.7-3.18.7c-1.27,0-2.38-.28-3.33-.83-.96-.56-1.7-1.33-2.23-2.33s-.8-2.17-.8-3.5c0-2.04.4-3.88,1.2-5.52.8-1.63,1.91-2.92,3.33-3.87,1.42-.94,3.07-1.42,4.93-1.42,1.31,0,2.39.28,3.25.85.86.57,1.42,1.31,1.68,2.22h.4l.57-2.6h2.6l-4.37,20.6c-.16.76-.53,1.38-1.12,1.87-.59.49-1.26.73-2.02.73h-10.07ZM449.45,122.43c1.02,0,1.96-.23,2.8-.68.84-.46,1.57-1.06,2.18-1.82.61-.76,1.08-1.61,1.42-2.55.33-.94.5-1.91.5-2.88,0-1.38-.39-2.49-1.17-3.33-.78-.84-1.82-1.27-3.13-1.27-1.4,0-2.61.38-3.63,1.13-1.02.76-1.81,1.75-2.37,2.98-.56,1.23-.83,2.55-.83,3.95s.37,2.44,1.1,3.25c.73.81,1.78,1.22,3.13,1.22Z">
+                        </path>
+                        <path
+                            d="M469.99,124.9c-1.31,0-2.48-.26-3.52-.78-1.03-.52-1.84-1.28-2.42-2.28-.58-1-.87-2.19-.87-3.57s.22-2.74.67-4.03c.44-1.29,1.09-2.44,1.95-3.47.86-1.02,1.9-1.83,3.13-2.43s2.64-.9,4.22-.9c1.49,0,2.72.29,3.68.88.97.59,1.68,1.36,2.15,2.32.47.96.7,1.97.7,3.03,0,.58-.07,1.17-.2,1.73l-.37,1.57h-13.27c-.02.18-.05.38-.08.6-.03.22-.05.46-.05.7,0,1.22.36,2.23,1.07,3.02.71.79,1.84,1.18,3.4,1.18s2.81-.34,3.68-1.02c.88-.68,1.53-1.48,1.95-2.42l2.13,1.2c-.42.87-.98,1.66-1.67,2.37-.69.71-1.54,1.27-2.57,1.68-1.02.41-2.27.62-3.73.62ZM466.42,114.57h10.6c.07-.38.1-.71.1-1,0-1.2-.41-2.11-1.23-2.73-.82-.62-1.84-.93-3.07-.93-1.56,0-2.9.44-4.03,1.33-1.13.89-1.92,2-2.37,3.33Z">
+                        </path>
+                        <path
+                            d="M482.52,124.43v-2.4h4.07l2.4-11.27c.07-.27.03-.47-.1-.62-.13-.14-.3-.22-.5-.22-.16,0-.32.06-.5.17l-3.03,2.07-1.33-1.97,2.97-2c.76-.51,1.52-.77,2.3-.77.69,0,1.29.19,1.8.58.51.39.8,1.02.87,1.88h.4c.64-.91,1.37-1.55,2.17-1.92.8-.37,1.63-.55,2.5-.55,1.58,0,2.83.46,3.75,1.38.92.92,1.38,2.14,1.38,3.65,0,.58-.07,1.17-.2,1.77l-2.83.2c.04-.24.08-.48.12-.72s.05-.46.05-.68c0-1.07-.3-1.86-.9-2.37-.6-.51-1.36-.77-2.27-.77s-1.67.22-2.33.65c-.67.43-1.21,1.01-1.63,1.73-.42.72-.72,1.51-.9,2.35l-1.57,7.4h3.93v2.4h-10.6Z">
+                        </path>
+                    </g>
+                </svg>
             </a>
-          </div>
-        </div>
 
-        <!-- Right: Static Map Link -->
-        <div class="footer-map">
-          <a href="https://www.google.com/maps/search/?api=1&query=Dopamina+Smash+Burger+Salerno+Piazza+Gioia+Flavio+2"
-            target="_blank" rel="noopener" class="map-link-container" id="map-link"
-            aria-label="Apri posizione di Dopamina Smash Burger in Google Maps">
-            <!-- Custom Generated Mockup dark map in assets -->
-            <img src="assets/map-dark.png"
-              alt="Google Maps screenshot di Piazza Gioia Flavio 2 a Salerno in modalità scura" class="map-img">
-            <div class="map-overlay-hint">
-              <span class="map-hint-text" data-translate="map_hint">Apri Mappa / Open Map</span>
+            <nav class="desktop-nav" aria-label="Navigazione Principale">
+                <a href="#menu-section" class="nav-link" data-it="MENU" data-en="MENU">MENU</a>
+                <a href="#vibe-section" class="nav-link" data-it="VIBE" data-en="VIBE">VIBE</a>
+                <a href="#location-section" class="nav-link" data-it="DOVE SIAMO" data-en="FIND US">DOVE SIAMO</a>
+            </nav>
+
+            <div class="header-cta">
+                <button class="lang-switch-btn" id="lang-switch" aria-label="Switch to English"><img src="assets/menu/english-menu.png" alt="English Menu" class="lang-icon"></button>
+                <a href="https://www.glovoapp.com/it/it/salerno/dopamina-smash-burger-sln/" target="_blank" rel="noopener noreferrer" class="cta-button" id="header-ordina-cta" data-it="ORDINA ORA" data-en="ORDER NOW">ORDINA ORA</a>
             </div>
-          </a>
         </div>
-      </div>
+    </header>
 
-      <hr class="footer-divider">
+    <main>
+        <!-- Hero Section -->
+        <section class="hero-section" id="hero">
+            <div class="hero-container">
+                <div class="hero-text-block">
+                    <h1 class="hero-title">
+                        <span class="trip-line">START YOUR TRIP.</span>
+                        <span class="brain-line text-accent">SMASH YOUR BRAIN</span>
+                    </h1>
 
-      <!-- Bottom: Social Links and Copyright -->
-      <div class="footer-bottom">
-        <div class="social-links">
-          <!-- Instagram link -->
-          <a href="https://www.instagram.com/dopaminasmashburger" target="_blank" rel="noopener" class="social-icon"
-            aria-label="Seguici su Instagram">
-            <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-              <path
-                d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.051.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" />
-            </svg>
-          </a>
-          <!-- Facebook link -->
-          <a href="https://www.facebook.com/dopaminasmashburger" target="_blank" rel="noopener" class="social-icon"
-            aria-label="Seguici su Facebook">
-            <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-              <path
-                d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
-            </svg>
-          </a>
+                    <p class="hero-subtitle" data-it="Il vero smash burger a Salerno." data-en="The real smash burger in Salerno.">Il vero smash burger a Salerno.</p>
+
+                    <div class="hero-actions">
+                        <a href="#menu-section" class="btn btn-outline" id="btn-hero-menu" data-it="GUARDA IL MENU" data-en="VIEW MENU">GUARDA IL MENU</a>
+                        <a href="https://www.glovoapp.com/it/it/salerno/dopamina-smash-burger-sln/" target="_blank" rel="noopener noreferrer" class="btn btn-filled" id="btn-hero-delivery" data-it="ORDINA DELIVERY" data-en="ORDER DELIVERY">ORDINA DELIVERY</a>
+                    </div>
+                </div>
+
+                <div class="hero-visual-block">
+                    <div class="burger-float-wrapper">
+                        <!-- Hero image of the burger overdose -->
+                        <img src="assets/food/BurgerOverDose.png" alt="Burger Overdose Dopamina Smash"
+                            class="hero-burger-img" id="hero-burger">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Menu Section -->
+        <section class="menu-section" id="menu-section">
+            <div class="section-container">
+                <div class="menu-header">
+                    <h2 class="menu-title">THE MENU</h2>
+                    <p class="menu-desc" data-it="Ogni panino viene schiacciato a regola d'arte per creare una crosticina croccante e saporita, trattenendo tutti i succhi all'interno." data-en="Each burger is smashed to perfection to create a crispy, flavorful crust, locking all the juices inside.">Ogni panino viene schiacciato a regola d'arte per creare una crosticina croccante e saporita, trattenendo tutti i succhi all'interno.</p>
+                </div>
+
+                <!-- Category Filters (Sticky receipt-style tags) -->
+                <div class="category-tabs" id="menu-tabs">
+                    <a href="#smash" class="tab-link active">SMASH</a>
+                    <a href="#baby-smash" class="tab-link">BABY SMASH</a>
+                    <a href="#chicken" class="tab-link">CHICKEN</a>
+                    <a href="#veggie" class="tab-link">VEGGIE</a>
+                    <a href="#fried" class="tab-link">FRIED</a>
+                    <a href="#dessert" class="tab-link">DESSERT</a>
+                    <a href="#drink" class="tab-link">DRINK</a>
+                    <a href="#extra" class="tab-link">EXTRA</a>
+                </div>
+
+                <!-- Menu Categories -->
+                <div class="menu-categories-container">
+
+                    <!-- Smash Category -->
+                    <div class="menu-category" id="smash">
+                        <div class="category-header-line">
+                            <img src="assets/menu/burger.png" class="category-icon" alt="">
+                            <h3 class="category-name">SMASH</h3>
+                        </div>
+                        <div class="category-items-grid">
+
+                            <!-- Item 1: Smash Standard -->
+                            <div class="menu-item-row has-image">
+                                <div class="item-visual-preview">
+                                    <img src="assets/food/BurgerMono.png" alt="Smash Burger Monodose"
+                                        class="item-popup-img">
+                                </div>
+                                <div class="item-text">
+                                    <div class="item-meta">
+                                        <h4 class="item-name" data-it="Smash Burger" data-en="Smash Burger">Smash Burger</h4>
+                                        <div class="item-prices">
+                                            <span class="price-tier"><span data-it="Monodose" data-en="Single">Monodose</span> <span class="price-val">€ 7,90</span></span>
+                                            <span class="price-tier"><span data-it="Doppiadose" data-en="Double">Doppiadose</span> <span class="price-val">€ 10,90</span></span>
+                                            <span class="price-tier"><span data-it="Overdose" data-en="Overdose">Overdose</span> <span class="price-val">€ 13,90</span></span>
+                                        </div>
+                                    </div>
+                                    <p class="item-ingredients" data-it="Potatoes bun ~ Hamburger 120gr ~ Cheddar ~ Cipolla rossa marinata ~ Cetriolino marinato ~ Insalata ~ Salsa Dopamina" data-en="Potato bun ~ 120g hamburger ~ Cheddar ~ Marinated red onion ~ Marinated pickle ~ Lettuce ~ Dopamina Sauce">Potatoes bun ~ Hamburger 120gr ~ Cheddar ~ Cipolla rossa marinata ~ Cetriolino marinato ~ Insalata ~ Salsa Dopamina</p>
+                                </div>
+                            </div>
+
+                            <!-- Item 2: Hot Smash Jam Monodose -->
+                            <div class="menu-item-row has-image">
+                                <div class="item-visual-preview">
+                                    <img src="assets/food/HotSmashJamMono.png" alt="Hot Smash Jam Monodose"
+                                        class="item-popup-img">
+                                </div>
+                                <div class="item-text">
+                                    <div class="item-meta">
+                                        <h4 class="item-name" data-it="Hot Smash Jam Monodose" data-en="Hot Smash Jam Single">Hot Smash Jam Monodose</h4>
+                                        <span class="price-val">€ 8,90</span>
+                                    </div>
+                                    <p class="item-ingredients" data-it="Potatoes Bun, hamburger 120g, cheddar, bacon jam, jalapeño, salsa Dopamina" data-en="Potato Bun, 120g hamburger, cheddar, bacon jam, jalapeño, Dopamina sauce">Potatoes Bun, hamburger 120g, cheddar, bacon jam, jalapeño, salsa Dopamina</p>
+                                </div>
+                            </div>
+
+                            <!-- Item 3: Hot Smash Jam Doppiadose -->
+                            <div class="menu-item-row has-image">
+                                <div class="item-visual-preview">
+                                    <img src="assets/food/HotSmashJamDoppia.png" alt="Hot Smash Jam Doppiadose"
+                                        class="item-popup-img">
+                                </div>
+                                <div class="item-text">
+                                    <div class="item-meta">
+                                        <h4 class="item-name" data-it="Hot Smash Jam Doppiadose" data-en="Hot Smash Jam Double">Hot Smash Jam Doppiadose</h4>
+                                        <span class="price-val">€ 11,90</span>
+                                    </div>
+                                    <p class="item-ingredients" data-it="Potatoes Bun, doppio hamburger 120g, doppio cheddar, bacon jam, jalapeño, salsa Dopamina" data-en="Potato Bun, double 120g burger, double cheddar, bacon jam, jalapeño, Dopamina sauce">Potatoes Bun, doppio hamburger 120g, doppio cheddar, bacon jam, jalapeño, salsa Dopamina</p>
+                                </div>
+                            </div>
+
+                            <!-- Special Graphic Box: Smash Menu -->
+                            <div class="special-menu-card">
+                                <div class="special-badge" data-it="MENU COMPLETO" data-en="FULL MENU">MENU COMPLETO</div>
+                                <div class="special-card-content">
+                                    <div class="special-card-left">
+                                        <h4 class="special-menu-title" data-it="SMASH BURGER MENU" data-en="SMASH BURGER MENU">SMASH BURGER MENU</h4>
+                                        <p class="special-menu-desc" data-it="BURGER DOPPIADOSE + FRENCH FRIES MONODOSE + BIBITA" data-en="DOUBLE BURGER + SINGLE FRENCH FRIES + SOFT DRINK">BURGER DOPPIADOSE + FRENCH FRIES MONODOSE + BIBITA</p>
+                                        <div class="special-menu-option"><span data-it="Dopaciock al menu" data-en="Add Dopaciock to menu">Dopaciock al menu</span> <span class="option-price">+ € 3,00</span></div>
+                                    </div>
+                                    <div class="special-card-right">
+                                        <span class="special-price">€ 14,90</span>
+                                        <img src="assets/food/BurgerMenu.png" alt="Smash Burger Menu"
+                                            class="special-menu-img">
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- Baby Smash Category -->
+                    <div class="menu-category" id="baby-smash">
+                        <div class="category-header-line">
+                            <img src="assets/menu/burger.png" class="category-icon" alt="">
+                            <h3 class="category-name">BABY SMASH</h3>
+                        </div>
+                        <div class="category-items-grid">
+
+                            <!-- Item 1: Baby Smash Monodose -->
+                            <div class="menu-item-row has-image">
+                                <div class="item-visual-preview">
+                                    <img src="assets/food/BabyBurger.png" alt="Baby Smash Burger"
+                                        class="item-popup-img">
+                                </div>
+                                <div class="item-text">
+                                    <div class="item-meta">
+                                        <h4 class="item-name" data-it="Baby Smash Burger" data-en="Baby Smash Burger">Baby Smash Burger</h4>
+                                        <span class="price-val">€ 5,90</span>
+                                    </div>
+                                    <p class="item-ingredients" data-it="Potatoes bun ~ Hamburger 120gr ~ CHEDDAR ~ KETCHUP ~ MAIONESE" data-en="Potato bun ~ 120g hamburger ~ CHEDDAR ~ KETCHUP ~ MAYO">Potatoes bun ~ Hamburger 120gr ~ CHEDDAR ~ KETCHUP ~ MAIONESE</p>
+                                </div>
+                            </div>
+
+                            <!-- Item 2: Baby Smash Menu -->
+                            <div class="menu-item-row has-image">
+                                <div class="item-visual-preview">
+                                    <img src="assets/food/FriesMono.png" alt="Baby Smash Burger Menu"
+                                        class="item-popup-img">
+                                </div>
+                                <div class="item-text">
+                                    <div class="item-meta">
+                                        <h4 class="item-name" data-it="Baby Smash Burger Menu" data-en="Baby Smash Burger Menu">Baby Smash Burger Menu</h4>
+                                        <span class="price-val">€ 10,90</span>
+                                    </div>
+                                    <p class="item-ingredients" data-it="BURGER + FRENCH FRIES MONODOSE + BIBITA" data-en="BURGER + SINGLE FRENCH FRIES + SOFT DRINK">BURGER + FRENCH FRIES MONODOSE + BIBITA</p>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- Chicken Category -->
+                    <div class="menu-category" id="chicken">
+                        <div class="category-header-line">
+                            <img src="assets/menu/chicken.png" class="category-icon" alt="">
+                            <h3 class="category-name">CHICKEN</h3>
+                        </div>
+                        <div class="category-items-grid">
+
+                            <!-- Item 1: Chicken Standard -->
+                            <div class="menu-item-row has-image">
+                                <div class="item-visual-preview">
+                                    <img src="assets/food/Chicken.png" alt="Chicken Burger" class="item-popup-img">
+                                </div>
+                                <div class="item-text">
+                                    <div class="item-meta">
+                                        <h4 class="item-name" data-it="Chicken Burger" data-en="Chicken Burger">Chicken Burger</h4>
+                                        <span class="price-val">€ 9,90</span>
+                                    </div>
+                                    <p class="item-ingredients" data-it="Potatoes bun ~ Pollo GLASSATO CON SALSA DOPAMINA HOT ~ Coleslaw ~ MAYO ALLA SENAPE" data-en="Potato bun ~ GLAZED CHICKEN WITH HOT DOPAMINA SAUCE ~ Coleslaw ~ MUSTARD MAYO">Potatoes bun ~ Pollo GLASSATO CON SALSA DOPAMINA HOT ~ Coleslaw ~ MAYO ALLA SENAPE</p>
+                                </div>
+                            </div>
+
+                            <!-- Item 2: Chicken Menu -->
+                            <div class="menu-item-row has-image">
+                                <div class="item-visual-preview">
+                                    <img src="assets/food/ChcickenMenu.png" alt="Chicken Menu" class="item-popup-img">
+                                </div>
+                                <div class="item-text">
+                                    <div class="item-meta">
+                                        <h4 class="item-name" data-it="Chicken Burger Menu" data-en="Chicken Burger Menu">Chicken Burger Menu</h4>
+                                        <span class="price-val">€ 14,90</span>
+                                    </div>
+                                    <p class="item-ingredients" data-it="CHICKEN + FRENCH FRIES MONODOSE + BIBITA + Dopaciock a soli € 3,00" data-en="CHICKEN + SINGLE FRENCH FRIES + SOFT DRINK + Dopaciock for only € 3.00">CHICKEN + FRENCH FRIES MONODOSE + BIBITA <br> <span class="text-accent">+ Dopaciock a soli € 3,00</span></p>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- Veggie Category -->
+                    <div class="menu-category" id="veggie">
+                        <div class="category-header-line">
+                            <img src="assets/menu/veggie.png" class="category-icon" alt="">
+                            <h3 class="category-name">VEGGIE</h3>
+                        </div>
+                        <div class="category-items-grid">
+
+                            <!-- Item 1: Veggie Standard -->
+                            <div class="menu-item-row has-image">
+                                <div class="item-visual-preview">
+                                    <img src="assets/food/Veggie.png" alt="Veggie Burger" class="item-popup-img">
+                                </div>
+                                <div class="item-text">
+                                    <div class="item-meta">
+                                        <h4 class="item-name" data-it="Veggie Burger" data-en="Veggie Burger">Veggie Burger</h4>
+                                        <span class="price-val">€ 9,90</span>
+                                    </div>
+                                    <p class="item-ingredients" data-it="POTATOES BUN ~ FUNGO LION'S MANE (AZ.LEONE BIANCO) ~ POMODORO ARROSTO ~ CAVOLO ROSSO MARINATO ~ INSALATA ~ SALSA DOPAMINA ai FUNGHETTI" data-en="POTATO BUN ~ LION'S MANE MUSHROOM (AZ. LEONE BIANCO) ~ ROASTED TOMATO ~ MARINATED RED CABBAGE ~ LETTUCE ~ MUSHROOM DOPAMINA SAUCE">POTATOES BUN ~ FUNGO LION'S MANE (AZ.LEONE BIANCO) ~ POMODORO ARROSTO ~ CAVOLO ROSSO MARINATO ~ INSALATA ~ SALSA DOPAMINA ai FUNGHETTI</p>
+                                </div>
+                            </div>
+
+                            <!-- Item 2: Veggie Menu -->
+                            <div class="menu-item-row has-image">
+                                <div class="item-visual-preview">
+                                    <img src="assets/food/veggieMenu.png" alt="Veggie Menu" class="item-popup-img">
+                                </div>
+                                <div class="item-text">
+                                    <div class="item-meta">
+                                        <h4 class="item-name" data-it="Veggie Burger Menu" data-en="Veggie Burger Menu">Veggie Burger Menu</h4>
+                                        <span class="price-val">€ 9,90</span>
+                                    </div>
+                                    <p class="item-ingredients" data-it="Veggie + FRENCH FRIES MONODOSE + BIBITA + Dopaciock a soli € 3,00" data-en="Veggie + SINGLE FRENCH FRIES + SOFT DRINK + Dopaciock for only € 3.00">Veggie + FRENCH FRIES MONODOSE + BIBITA <br> <span class="text-accent">+ Dopaciock a soli € 3,00</span></p>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- Compact Categories (Fried, Dessert, Drink, Extra) split into columns for cleaner spacing -->
+                    <div class="compact-categories-grid">
+
+                        <!-- Fried Column -->
+                        <div class="menu-category" id="fried">
+                            <div class="category-header-line">
+                                <img src="assets/menu/fried.png" class="category-icon" alt="">
+                                <h3 class="category-name">FRIED</h3>
+                            </div>
+                            <div class="compact-items-list">
+
+                                <div class="compact-item">
+                                    <div class="compact-meta">
+                                        <span class="compact-name" data-it="French Fries (Monodose)" data-en="French Fries (Single)">French Fries (Monodose)</span>
+                                        <span class="compact-price">€ 3,50</span>
+                                    </div>
+                                </div>
+                                <div class="compact-item">
+                                    <div class="compact-meta">
+                                        <span class="compact-name" data-it="French Fries (Doppiadose)" data-en="French Fries (Double)">French Fries (Doppiadose)</span>
+                                        <span class="compact-price">€ 5,00</span>
+                                    </div>
+                                </div>
+                                <div class="compact-item">
+                                    <div class="compact-meta">
+                                        <span class="compact-name" data-it="Chicken Nuggets + DOPAMINA HOT (Monodose)" data-en="Chicken Nuggets + HOT DOPAMINA (Single)">Chicken Nuggets + DOPAMINA HOT (Monodose)</span>
+                                        <span class="compact-price">€ 6,00</span>
+                                    </div>
+                                </div>
+                                <div class="compact-item">
+                                    <div class="compact-meta">
+                                        <span class="compact-name" data-it="Chicken Nuggets + DOPAMINA HOT (Doppiadose)" data-en="Chicken Nuggets + HOT DOPAMINA (Double)">Chicken Nuggets + DOPAMINA HOT (Doppiadose)</span>
+                                        <span class="compact-price">€ 10,00</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Dessert Column -->
+                        <div class="menu-category" id="dessert">
+                            <div class="category-header-line">
+                                <img src="assets/menu/dessert.png" class="category-icon" alt="">
+                                <h3 class="category-name">DESSERT</h3>
+                            </div>
+                            <div class="compact-items-list">
+                                <div class="compact-item">
+                                    <div class="compact-meta">
+                                        <span class="compact-name" data-it="Dopaciock" data-en="Dopaciock">Dopaciock</span>
+                                        <span class="compact-price">€ 4,50</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Drink Column -->
+                        <div class="menu-category" id="drink">
+                            <div class="category-header-line">
+                                <img src="assets/menu/drink.png" class="category-icon" alt="">
+                                <h3 class="category-name">DRINK</h3>
+                            </div>
+                            <div class="compact-items-list">
+                                <div class="compact-item">
+                                    <div class="compact-meta">
+                                        <span class="compact-name" data-it="Acqua" data-en="Water">Acqua</span>
+                                        <span class="compact-price">€ 1,00</span>
+                                    </div>
+                                </div>
+                                <div class="compact-item">
+                                    <div class="compact-meta">
+                                        <span class="compact-name" data-it="Bevande" data-en="Soft Drinks">Bevande</span>
+                                        <span class="compact-price">€ 3,00</span>
+                                    </div>
+                                </div>
+                                <div class="compact-item">
+                                    <div class="compact-meta">
+                                        <span class="compact-name" data-it="Birra" data-en="Beer">Birra</span>
+                                        <span class="compact-price">€ 4,00</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Extra Column -->
+                        <div class="menu-category" id="extra">
+                            <div class="category-header-line">
+                                <img src="assets/menu/extra.png" class="category-icon" alt="">
+                                <h3 class="category-name">EXTRA</h3>
+                            </div>
+                            <div class="compact-items-list">
+                                <div class="compact-item">
+                                    <div class="compact-meta">
+                                        <span class="compact-name">KETCHUP</span>
+                                        <span class="compact-price">€ 0,50</span>
+                                    </div>
+                                </div>
+                                <div class="compact-item">
+                                    <div class="compact-meta">
+                                        <span class="compact-name">Mayo</span>
+                                        <span class="compact-price">€ 0,50</span>
+                                    </div>
+                                </div>
+                                <div class="compact-item">
+                                    <div class="compact-meta">
+                                        <span class="compact-name">MAYO SENAPE</span>
+                                        <span class="compact-price">€ 0,50</span>
+                                    </div>
+                                </div>
+                                <div class="compact-item">
+                                    <div class="compact-meta">
+                                        <span class="compact-name">SALSA DOPAMINA</span>
+                                        <span class="compact-price">€ 1,00</span>
+                                    </div>
+                                </div>
+                                <div class="compact-item">
+                                    <div class="compact-meta">
+                                        <span class="compact-name">SALSA DOPAMINA hot</span>
+                                        <span class="compact-price">€ 1,00</span>
+                                    </div>
+                                </div>
+                                <div class="compact-item">
+                                    <div class="compact-meta">
+                                        <span class="compact-name">CHEDDAR</span>
+                                        <span class="compact-price">€ 0,80</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Brand Vibe Section "THE TRIP" -->
+        <section class="vibe-section" id="vibe-section">
+            <!-- Background Watermark Glow -->
+            <div class="vibe-watermark" id="vibe-watermark"></div>
+
+            <div class="section-container vibe-content-wrapper">
+                <div class="vibe-header">
+                    <h2 class="vibe-title" data-it="THE TRIP" data-en="THE TRIP">THE TRIP</h2>
+                    <span class="vibe-subtitle text-accent" data-it="LA SCIENZA DELLO SMASH" data-en="THE SCIENCE OF SMASH">LA SCIENZA DELLO SMASH</span>
+                </div>
+
+                <div class="vibe-grid">
+                    <div class="vibe-text-col">
+                        <p class="vibe-text" data-it="La carne schiacciata con forza su una piastra rovente a 200°C innesca la leggendaria Reazione di Maillard." data-en="Beef pressed firmly on a scorching 200°C griddle triggers the legendary Maillard Reaction.">La carne schiacciata con forza su una piastra rovente a 200°C innesca la leggendaria <span class="highlight">Reazione di Maillard</span>.</p>
+                        <p class="vibe-text" data-it="Gli zuccheri e gli amminoacidi si fondono, creando una crosticina croccante che sigilla all'interno tutti i succhi e i sapori naturali del manzo. Non stiamo parlando di un semplice hamburger: stiamo parlando di chimica culinaria pura." data-en="Sugars and amino acids fuse, creating a crispy crust that seals in all the beef's natural juices and flavor. We're not talking about a simple hamburger: we're talking pure culinary chemistry.">Gli zuccheri e gli amminoacidi si fondono, creando una crosticina croccante che sigilla all'interno tutti i succhi e i sapori naturali del manzo. Non stiamo parlando di un semplice hamburger: stiamo parlando di chimica culinaria pura.</p>
+                        <p class="vibe-text" data-it="Ad ogni morso, la croccantezza esterna si fonde con la morbidezza interna e la sapidità del cheddar fuso, innescando una scarica immediata di dopamina nel tuo cervello. Smash your brain, start your trip." data-en="With every bite, the external crunch merges with the inner tenderness and savory melted cheddar, triggering an immediate rush of dopamine in your brain. Smash your brain, start your trip.">Ad ogni morso, la croccantezza esterna si fonde con la morbidezza interna e la sapidità del cheddar fuso, innescando una scarica immediata di dopamina nel tuo cervello. <strong>Smash your brain, start your trip.</strong></p>
+                    </div>
+                    <div class="vibe-visual-col">
+                        <div class="image-gallery-container">
+                            <img src="assets/place/Cooking.jpg" alt="Smash cooking piastra" class="vibe-gallery-img">
+                            <img src="assets/place/place.jpg" alt="Dopamina locale" class="vibe-gallery-img">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Location & Footer Info Section -->
+        <section class="location-section" id="location-section">
+            <div class="section-container location-grid">
+                <div class="location-info-block">
+                    <h2 class="location-title" data-it="DOVE SIAMO" data-en="FIND US">DOVE SIAMO</h2>
+
+                    <div class="info-rows-container">
+                        <div class="info-item">
+                            <h5 class="info-label" data-it="INDIRIZZO" data-en="ADDRESS">INDIRIZZO</h5>
+                            <p class="info-value">Piazza Flavio Gioia, 2 - Salerno (SA)</p>
+                        </div>
+
+                        <div class="info-item">
+                            <h5 class="info-label" data-it="ORARI DI APERTURA" data-en="OPENING HOURS">ORARI DI APERTURA</h5>
+                            <p class="info-value" data-it="Aperto tutti i giorni dalle 18:15 a tardi" data-en="Open every day from 6:15 PM till late">Aperto tutti i giorni dalle 18:15 a tardi</p>
+                        </div>
+
+                        <div class="info-item">
+                            <h5 class="info-label" data-it="CONTATTI & SOCIAL" data-en="CONTACTS & SOCIAL">CONTATTI & SOCIAL</h5>
+                            <p class="info-value">
+                                Email: <a href="mailto:info@dopaminasmash.it"
+                                    class="info-link">info@dopaminasmash.it</a><br>
+                                Instagram: <a href="https://www.instagram.com/dopamina_smashburger/" target="_blank"
+                                    rel="noopener noreferrer" class="info-link text-accent">@dopamina_smashburger</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="location-map-block">
+                    <!-- Interactive styled map wrapper -->
+                    <div id="map-container" aria-label="Mappa di Dopamina Smash Burger"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer Graphic Illustration -->
+        <div class="footer-graphic-container">
+            <img src="assets/smash-footer.png" alt="Dopamina Smash Illustration" class="footer-illustration">
         </div>
-        <p class="copyright" id="footer-copyright">
-          &copy; 2026 Dopamina Smash Burger. Tutti i diritti riservati. P.IVA 0899767868.
-        </p>
-      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="footer-container">
+            <div class="footer-bottom-line">
+                <span class="legal-text">P.IVA 01234567890 | Dopamina Smash Burger © 2026</span>
+                <span class="credits-text">All rights reserved.</span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Mobile-First Sticky Delivery Bar -->
+    <div class="mobile-sticky-bar" id="mobile-delivery-bar">
+        <a href="https://www.glovoapp.com/it/it/salerno/dopamina-smash-burger-sln/" target="_blank" rel="noopener noreferrer" class="mobile-cta-btn" data-it="ORDINA DELIVERY (GLOVO)" data-en="ORDER DELIVERY (GLOVO)">
+            ORDINA DELIVERY (GLOVO)
+        </a>
     </div>
-  </footer>
 
-  <!-- Vanilla JS Link -->
-  <script src="index.js"></script>
+    <!-- Leaflet JS for custom monochrome map -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+
+    <!-- Core JS -->
+    <script src="index.js"></script>
 </body>
 
 </html>
