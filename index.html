@@ -40,7 +40,9 @@
 <body>
 
     <!-- Red Trippy Watermark Pattern (Dynamic Watermark Lines) -->
-    <div class="trippy-watermark-container" id="watermark"></div>
+    <div class="watermark-wrapper">
+        <div class="trippy-watermark-container" id="watermark"></div>
+    </div>
 
     <!-- Header / Sticky Navigation -->
     <header class="sticky-header" id="main-header">
@@ -119,10 +121,26 @@
 
             <div class="header-cta">
                 <button class="lang-switch-btn" id="lang-switch" aria-label="Switch to English"><img src="assets/menu/english-menu.png" alt="English Menu" class="lang-icon"></button>
-                <a href="https://www.glovoapp.com/it/it/salerno/dopamina-smash-burger-sln/" target="_blank" rel="noopener noreferrer" class="cta-button" id="header-ordina-cta" data-it="ORDINA ORA" data-en="ORDER NOW">ORDINA ORA</a>
+                <a href="#" class="cta-button" id="header-ordina-cta" data-it="ORDINA ORA" data-en="ORDER NOW">ORDINA ORA</a>
+                <!-- Hamburger Button -->
+                <button class="hamburger-btn" id="mobile-menu-toggle" aria-label="Toggle Menu">
+                    <span class="hamburger-bar"></span>
+                    <span class="hamburger-bar"></span>
+                    <span class="hamburger-bar"></span>
+                </button>
             </div>
         </div>
     </header>
+
+    <!-- Mobile Menu Overlay -->
+    <div class="mobile-menu" id="mobile-menu">
+        <nav class="mobile-nav" aria-label="Navigazione Mobile">
+            <a href="#menu-section" class="mobile-nav-link" data-it="MENU" data-en="MENU">MENU</a>
+            <a href="#vibe-section" class="mobile-nav-link" data-it="VIBE" data-en="VIBE">VIBE</a>
+            <a href="#location-section" class="mobile-nav-link" data-it="DOVE SIAMO" data-en="FIND US">DOVE SIAMO</a>
+            <a href="#" class="mobile-nav-cta" data-it="ORDINA ORA" data-en="ORDER NOW">ORDINA ORA</a>
+        </nav>
+    </div>
 
     <main>
         <!-- Hero Section -->
@@ -138,15 +156,17 @@
 
                     <div class="hero-actions">
                         <a href="#menu-section" class="btn btn-outline" id="btn-hero-menu" data-it="GUARDA IL MENU" data-en="VIEW MENU">GUARDA IL MENU</a>
-                        <a href="https://www.glovoapp.com/it/it/salerno/dopamina-smash-burger-sln/" target="_blank" rel="noopener noreferrer" class="btn btn-filled" id="btn-hero-delivery" data-it="ORDINA DELIVERY" data-en="ORDER DELIVERY">ORDINA DELIVERY</a>
+                        <a href="#" class="btn btn-filled" id="btn-hero-delivery" data-it="ORDINA DELIVERY" data-en="ORDER DELIVERY">ORDINA DELIVERY</a>
                     </div>
                 </div>
 
                 <div class="hero-visual-block">
                     <div class="burger-float-wrapper">
-                        <!-- Hero image of the burger overdose -->
-                        <img src="assets/food/BurgerOverDose.png" alt="Burger Overdose Dopamina Smash"
-                            class="hero-burger-img" id="hero-burger">
+                        <!-- Hero video of the burger overdose -->
+                        <video class="hero-burger-img" id="hero-burger" autoplay loop muted playsinline>
+                            <source src="assets/video/header.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
                     </div>
                 </div>
             </div>
@@ -193,9 +213,9 @@
                                     <div class="item-meta">
                                         <h4 class="item-name" data-it="Smash Burger" data-en="Smash Burger">Smash Burger</h4>
                                         <div class="item-prices">
-                                            <span class="price-tier"><span data-it="Monodose" data-en="Single">Monodose</span> <span class="price-val">€ 7,90</span></span>
-                                            <span class="price-tier"><span data-it="Doppiadose" data-en="Double">Doppiadose</span> <span class="price-val">€ 10,90</span></span>
-                                            <span class="price-tier"><span data-it="Overdose" data-en="Overdose">Overdose</span> <span class="price-val">€ 13,90</span></span>
+                                            <span class="price-tier"><span data-it="Monodose" data-en="Single">Monodose</span> <span class="price-val">€ 9,50</span></span>
+                                            <span class="price-tier"><span data-it="Doppiadose" data-en="Double">Doppiadose</span> <span class="price-val">€ 12,50</span></span>
+                                            <span class="price-tier"><span data-it="Overdose" data-en="Overdose">Overdose</span> <span class="price-val">€ 15,50</span></span>
                                         </div>
                                     </div>
                                     <p class="item-ingredients" data-it="Potatoes bun ~ Hamburger 120gr ~ Cheddar ~ Cipolla rossa marinata ~ Cetriolino marinato ~ Insalata ~ Salsa Dopamina" data-en="Potato bun ~ 120g hamburger ~ Cheddar ~ Marinated red onion ~ Marinated pickle ~ Lettuce ~ Dopamina Sauce">Potatoes bun ~ Hamburger 120gr ~ Cheddar ~ Cipolla rossa marinata ~ Cetriolino marinato ~ Insalata ~ Salsa Dopamina</p>
@@ -211,7 +231,7 @@
                                 <div class="item-text">
                                     <div class="item-meta">
                                         <h4 class="item-name" data-it="Hot Smash Jam Monodose" data-en="Hot Smash Jam Single">Hot Smash Jam Monodose</h4>
-                                        <span class="price-val">€ 8,90</span>
+                                        <span class="price-val">€ 10,90</span>
                                     </div>
                                     <p class="item-ingredients" data-it="Potatoes Bun, hamburger 120g, cheddar, bacon jam, jalapeño, salsa Dopamina" data-en="Potato Bun, 120g hamburger, cheddar, bacon jam, jalapeño, Dopamina sauce">Potatoes Bun, hamburger 120g, cheddar, bacon jam, jalapeño, salsa Dopamina</p>
                                 </div>
@@ -226,7 +246,7 @@
                                 <div class="item-text">
                                     <div class="item-meta">
                                         <h4 class="item-name" data-it="Hot Smash Jam Doppiadose" data-en="Hot Smash Jam Double">Hot Smash Jam Doppiadose</h4>
-                                        <span class="price-val">€ 11,90</span>
+                                        <span class="price-val">€ 13,90</span>
                                     </div>
                                     <p class="item-ingredients" data-it="Potatoes Bun, doppio hamburger 120g, doppio cheddar, bacon jam, jalapeño, salsa Dopamina" data-en="Potato Bun, double 120g burger, double cheddar, bacon jam, jalapeño, Dopamina sauce">Potatoes Bun, doppio hamburger 120g, doppio cheddar, bacon jam, jalapeño, salsa Dopamina</p>
                                 </div>
@@ -242,9 +262,11 @@
                                         <div class="special-menu-option"><span data-it="Dopaciock al menu" data-en="Add Dopaciock to menu">Dopaciock al menu</span> <span class="option-price">+ € 3,00</span></div>
                                     </div>
                                     <div class="special-card-right">
-                                        <span class="special-price">€ 14,90</span>
-                                        <img src="assets/food/BurgerMenu.png" alt="Smash Burger Menu"
-                                            class="special-menu-img">
+                                        <span class="special-price">€ 17,90</span>
+                                        <div class="special-img-wrapper">
+                                            <img src="assets/food/BurgerMenu.png" alt="Smash Burger Menu"
+                                                class="special-menu-img">
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -260,7 +282,7 @@
                         </div>
                         <div class="category-items-grid">
 
-                            <!-- Item 1: Baby Smash Monodose -->
+                            <!-- Item 1: Baby Smash -->
                             <div class="menu-item-row has-image">
                                 <div class="item-visual-preview">
                                     <img src="assets/food/BabyBurger.png" alt="Baby Smash Burger"
@@ -269,24 +291,12 @@
                                 <div class="item-text">
                                     <div class="item-meta">
                                         <h4 class="item-name" data-it="Baby Smash Burger" data-en="Baby Smash Burger">Baby Smash Burger</h4>
-                                        <span class="price-val">€ 5,90</span>
+                                        <div class="item-prices">
+                                            <span class="price-tier"><span data-it="Solo Burger" data-en="Burger Only">Solo Burger</span> <span class="price-val">€ 7,90</span></span>
+                                            <span class="price-tier"><span data-it="Menu (+ Patatine &amp; Bibita)" data-en="Menu (+ Fries &amp; Drink)">Menu (+ Patatine &amp; Bibita)</span> <span class="price-val">€ 12,90</span></span>
+                                        </div>
                                     </div>
                                     <p class="item-ingredients" data-it="Potatoes bun ~ Hamburger 120gr ~ CHEDDAR ~ KETCHUP ~ MAIONESE" data-en="Potato bun ~ 120g hamburger ~ CHEDDAR ~ KETCHUP ~ MAYO">Potatoes bun ~ Hamburger 120gr ~ CHEDDAR ~ KETCHUP ~ MAIONESE</p>
-                                </div>
-                            </div>
-
-                            <!-- Item 2: Baby Smash Menu -->
-                            <div class="menu-item-row has-image">
-                                <div class="item-visual-preview">
-                                    <img src="assets/food/FriesMono.png" alt="Baby Smash Burger Menu"
-                                        class="item-popup-img">
-                                </div>
-                                <div class="item-text">
-                                    <div class="item-meta">
-                                        <h4 class="item-name" data-it="Baby Smash Burger Menu" data-en="Baby Smash Burger Menu">Baby Smash Burger Menu</h4>
-                                        <span class="price-val">€ 10,90</span>
-                                    </div>
-                                    <p class="item-ingredients" data-it="BURGER + FRENCH FRIES MONODOSE + BIBITA" data-en="BURGER + SINGLE FRENCH FRIES + SOFT DRINK">BURGER + FRENCH FRIES MONODOSE + BIBITA</p>
                                 </div>
                             </div>
 
@@ -309,23 +319,28 @@
                                 <div class="item-text">
                                     <div class="item-meta">
                                         <h4 class="item-name" data-it="Chicken Burger" data-en="Chicken Burger">Chicken Burger</h4>
-                                        <span class="price-val">€ 9,90</span>
+                                        <span class="price-val">€ 11,90</span>
                                     </div>
                                     <p class="item-ingredients" data-it="Potatoes bun ~ Pollo GLASSATO CON SALSA DOPAMINA HOT ~ Coleslaw ~ MAYO ALLA SENAPE" data-en="Potato bun ~ GLAZED CHICKEN WITH HOT DOPAMINA SAUCE ~ Coleslaw ~ MUSTARD MAYO">Potatoes bun ~ Pollo GLASSATO CON SALSA DOPAMINA HOT ~ Coleslaw ~ MAYO ALLA SENAPE</p>
                                 </div>
                             </div>
 
-                            <!-- Item 2: Chicken Menu -->
-                            <div class="menu-item-row has-image">
-                                <div class="item-visual-preview">
-                                    <img src="assets/food/ChcickenMenu.png" alt="Chicken Menu" class="item-popup-img">
-                                </div>
-                                <div class="item-text">
-                                    <div class="item-meta">
-                                        <h4 class="item-name" data-it="Chicken Burger Menu" data-en="Chicken Burger Menu">Chicken Burger Menu</h4>
-                                        <span class="price-val">€ 14,90</span>
+                            <!-- Special Graphic Box: Chicken Menu -->
+                            <div class="special-menu-card">
+                                <div class="special-badge" data-it="MENU COMPLETO" data-en="FULL MENU">MENU COMPLETO</div>
+                                <div class="special-card-content">
+                                    <div class="special-card-left">
+                                        <h4 class="special-menu-title" data-it="CHICKEN BURGER MENU" data-en="CHICKEN BURGER MENU">CHICKEN BURGER MENU</h4>
+                                        <p class="special-menu-desc" data-it="CHICKEN BURGER + FRENCH FRIES MONODOSE + BIBITA" data-en="CHICKEN BURGER + SINGLE FRENCH FRIES + SOFT DRINK">CHICKEN BURGER + FRENCH FRIES MONODOSE + BIBITA</p>
+                                        <div class="special-menu-option"><span data-it="Dopaciock al menu" data-en="Add Dopaciock to menu">Dopaciock al menu</span> <span class="option-price">+ € 3,50</span></div>
                                     </div>
-                                    <p class="item-ingredients" data-it="CHICKEN + FRENCH FRIES MONODOSE + BIBITA + Dopaciock a soli € 3,00" data-en="CHICKEN + SINGLE FRENCH FRIES + SOFT DRINK + Dopaciock for only € 3.00">CHICKEN + FRENCH FRIES MONODOSE + BIBITA <br> <span class="text-accent">+ Dopaciock a soli € 3,00</span></p>
+                                    <div class="special-card-right">
+                                        <span class="special-price">€ 17,90</span>
+                                        <div class="special-img-wrapper">
+                                            <img src="assets/food/ChcickenMenu.png" alt="Chicken Burger Menu"
+                                                class="special-menu-img">
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
 
@@ -348,23 +363,28 @@
                                 <div class="item-text">
                                     <div class="item-meta">
                                         <h4 class="item-name" data-it="Veggie Burger" data-en="Veggie Burger">Veggie Burger</h4>
-                                        <span class="price-val">€ 9,90</span>
+                                        <span class="price-val">€ 11,90</span>
                                     </div>
                                     <p class="item-ingredients" data-it="POTATOES BUN ~ FUNGO LION'S MANE (AZ.LEONE BIANCO) ~ POMODORO ARROSTO ~ CAVOLO ROSSO MARINATO ~ INSALATA ~ SALSA DOPAMINA ai FUNGHETTI" data-en="POTATO BUN ~ LION'S MANE MUSHROOM (AZ. LEONE BIANCO) ~ ROASTED TOMATO ~ MARINATED RED CABBAGE ~ LETTUCE ~ MUSHROOM DOPAMINA SAUCE">POTATOES BUN ~ FUNGO LION'S MANE (AZ.LEONE BIANCO) ~ POMODORO ARROSTO ~ CAVOLO ROSSO MARINATO ~ INSALATA ~ SALSA DOPAMINA ai FUNGHETTI</p>
                                 </div>
                             </div>
 
-                            <!-- Item 2: Veggie Menu -->
-                            <div class="menu-item-row has-image">
-                                <div class="item-visual-preview">
-                                    <img src="assets/food/veggieMenu.png" alt="Veggie Menu" class="item-popup-img">
-                                </div>
-                                <div class="item-text">
-                                    <div class="item-meta">
-                                        <h4 class="item-name" data-it="Veggie Burger Menu" data-en="Veggie Burger Menu">Veggie Burger Menu</h4>
-                                        <span class="price-val">€ 9,90</span>
+                            <!-- Special Graphic Box: Veggie Menu -->
+                            <div class="special-menu-card">
+                                <div class="special-badge" data-it="MENU COMPLETO" data-en="FULL MENU">MENU COMPLETO</div>
+                                <div class="special-card-content">
+                                    <div class="special-card-left">
+                                        <h4 class="special-menu-title" data-it="VEGGIE BURGER MENU" data-en="VEGGIE BURGER MENU">VEGGIE BURGER MENU</h4>
+                                        <p class="special-menu-desc" data-it="VEGGIE BURGER + FRENCH FRIES MONODOSE + BIBITA" data-en="VEGGIE BURGER + SINGLE FRENCH FRIES + SOFT DRINK">VEGGIE BURGER + FRENCH FRIES MONODOSE + BIBITA</p>
+                                        <div class="special-menu-option"><span data-it="Dopaciock al menu" data-en="Add Dopaciock to menu">Dopaciock al menu</span> <span class="option-price">+ € 3,50</span></div>
                                     </div>
-                                    <p class="item-ingredients" data-it="Veggie + FRENCH FRIES MONODOSE + BIBITA + Dopaciock a soli € 3,00" data-en="Veggie + SINGLE FRENCH FRIES + SOFT DRINK + Dopaciock for only € 3.00">Veggie + FRENCH FRIES MONODOSE + BIBITA <br> <span class="text-accent">+ Dopaciock a soli € 3,00</span></p>
+                                    <div class="special-card-right">
+                                        <span class="special-price">€ 17,90</span>
+                                        <div class="special-img-wrapper">
+                                            <img src="assets/food/veggieMenu.png" alt="Veggie Burger Menu"
+                                                class="special-menu-img">
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
 
@@ -419,7 +439,7 @@
                                 <div class="compact-item">
                                     <div class="compact-meta">
                                         <span class="compact-name" data-it="Dopaciock" data-en="Dopaciock">Dopaciock</span>
-                                        <span class="compact-price">€ 4,50</span>
+                                        <span class="compact-price">€ 3,50</span>
                                     </div>
                                 </div>
                             </div>
@@ -434,19 +454,19 @@
                             <div class="compact-items-list">
                                 <div class="compact-item">
                                     <div class="compact-meta">
-                                        <span class="compact-name" data-it="Acqua" data-en="Water">Acqua</span>
-                                        <span class="compact-price">€ 1,00</span>
+                                        <span class="compact-name" data-it="Acqua (Naturale / Frizzante)" data-en="Water (Still / Sparkling)">Acqua (Naturale / Frizzante)</span>
+                                        <span class="compact-price">€ 1,50</span>
                                     </div>
                                 </div>
                                 <div class="compact-item">
                                     <div class="compact-meta">
-                                        <span class="compact-name" data-it="Bevande" data-en="Soft Drinks">Bevande</span>
-                                        <span class="compact-price">€ 3,00</span>
+                                        <span class="compact-name" data-it="Coca-Cola / Zero / Fanta / Sprite" data-en="Coca-Cola / Zero / Fanta / Sprite">Coca-Cola / Zero / Fanta / Sprite</span>
+                                        <span class="compact-price">€ 3,50</span>
                                     </div>
                                 </div>
                                 <div class="compact-item">
                                     <div class="compact-meta">
-                                        <span class="compact-name" data-it="Birra" data-en="Beer">Birra</span>
+                                        <span class="compact-name" data-it="Birra Heineken" data-en="Heineken Beer">Birra Heineken</span>
                                         <span class="compact-price">€ 4,00</span>
                                     </div>
                                 </div>
@@ -517,9 +537,9 @@
 
                 <div class="vibe-grid">
                     <div class="vibe-text-col">
-                        <p class="vibe-text" data-it="La carne schiacciata con forza su una piastra rovente a 200°C innesca la leggendaria Reazione di Maillard." data-en="Beef pressed firmly on a scorching 200°C griddle triggers the legendary Maillard Reaction.">La carne schiacciata con forza su una piastra rovente a 200°C innesca la leggendaria <span class="highlight">Reazione di Maillard</span>.</p>
+                        <p class="vibe-text" data-it="La carne schiacciata con forza su una piastra rovente a 200°C innesca la leggendaria &lt;span class='highlight'&gt;Reazione di Maillard&lt;/span&gt;." data-en="Beef pressed firmly on a scorching 200°C griddle triggers the legendary &lt;span class='highlight'&gt;Maillard Reaction&lt;/span&gt;.">La carne schiacciata con forza su una piastra rovente a 200°C innesca la leggendaria <span class="highlight">Reazione di Maillard</span>.</p>
                         <p class="vibe-text" data-it="Gli zuccheri e gli amminoacidi si fondono, creando una crosticina croccante che sigilla all'interno tutti i succhi e i sapori naturali del manzo. Non stiamo parlando di un semplice hamburger: stiamo parlando di chimica culinaria pura." data-en="Sugars and amino acids fuse, creating a crispy crust that seals in all the beef's natural juices and flavor. We're not talking about a simple hamburger: we're talking pure culinary chemistry.">Gli zuccheri e gli amminoacidi si fondono, creando una crosticina croccante che sigilla all'interno tutti i succhi e i sapori naturali del manzo. Non stiamo parlando di un semplice hamburger: stiamo parlando di chimica culinaria pura.</p>
-                        <p class="vibe-text" data-it="Ad ogni morso, la croccantezza esterna si fonde con la morbidezza interna e la sapidità del cheddar fuso, innescando una scarica immediata di dopamina nel tuo cervello. Smash your brain, start your trip." data-en="With every bite, the external crunch merges with the inner tenderness and savory melted cheddar, triggering an immediate rush of dopamine in your brain. Smash your brain, start your trip.">Ad ogni morso, la croccantezza esterna si fonde con la morbidezza interna e la sapidità del cheddar fuso, innescando una scarica immediata di dopamina nel tuo cervello. <strong>Smash your brain, start your trip.</strong></p>
+                        <p class="vibe-text" data-it="Ad ogni morso, la croccantezza esterna si fonde con la morbidezza interna e la sapidità del cheddar fuso, innescando una scarica immediata di dopamina nel tuo cervello. &lt;strong&gt;Start your trip. Smash your brain&lt;/strong&gt;" data-en="With every bite, the external crunch merges with the inner tenderness and savory melted cheddar, triggering an immediate rush of dopamine in your brain. &lt;strong&gt;Start your trip. Smash your brain&lt;/strong&gt;">Ad ogni morso, la croccantezza esterna si fonde con la morbidezza interna e la sapidità del cheddar fuso, innescando una scarica immediata di dopamina nel tuo cervello. <strong>Start your trip. Smash Your Brain</strong></p>
                     </div>
                     <div class="vibe-visual-col">
                         <div class="image-gallery-container">
@@ -540,21 +560,27 @@
                     <div class="info-rows-container">
                         <div class="info-item">
                             <h5 class="info-label" data-it="INDIRIZZO" data-en="ADDRESS">INDIRIZZO</h5>
-                            <p class="info-value">Piazza Flavio Gioia, 2 - Salerno (SA)</p>
+                            <p class="info-value">
+                                <a href="https://maps.app.goo.gl/NZU2qP6i4Zhkw6R87" target="_blank" rel="noopener noreferrer" class="info-link">
+                                    Piazza Flavio Gioia, 2 - Salerno (SA)
+                                </a>
+                            </p>
                         </div>
 
                         <div class="info-item">
                             <h5 class="info-label" data-it="ORARI DI APERTURA" data-en="OPENING HOURS">ORARI DI APERTURA</h5>
-                            <p class="info-value" data-it="Aperto tutti i giorni dalle 18:15 a tardi" data-en="Open every day from 6:15 PM till late">Aperto tutti i giorni dalle 18:15 a tardi</p>
+                            <p class="info-value" data-it="In settimana: 12:00 - 01:00 | Weekend: 12:00 - 03:00" data-en="Weekdays: 12:00 PM - 01:00 AM | Weekend: 12:00 PM - 03:00 AM">In settimana: 12:00 - 01:00 | Weekend: 12:00 - 03:00</p>
                         </div>
 
                         <div class="info-item">
                             <h5 class="info-label" data-it="CONTATTI & SOCIAL" data-en="CONTACTS & SOCIAL">CONTATTI & SOCIAL</h5>
                             <p class="info-value">
-                                Email: <a href="mailto:info@dopaminasmash.it"
-                                    class="info-link">info@dopaminasmash.it</a><br>
-                                Instagram: <a href="https://www.instagram.com/dopamina_smashburger/" target="_blank"
-                                    rel="noopener noreferrer" class="info-link text-accent">@dopamina_smashburger</a>
+                                Email: <a href="mailto:amministrazione@dopaminaburger.it"
+                                    class="info-link">amministrazione@dopaminaburger.it</a><br>
+                                Instagram: <a href="https://www.instagram.com/dopamina.smash/" target="_blank"
+                                    rel="noopener noreferrer" class="info-link text-accent">@dopamina.smash</a><br>
+                                TikTok: <a href="https://www.tiktok.com/@dopamina.smash" target="_blank"
+                                    rel="noopener noreferrer" class="info-link text-accent">@dopamina.smash</a>
                             </p>
                         </div>
                     </div>
@@ -577,7 +603,7 @@
     <footer class="main-footer">
         <div class="footer-container">
             <div class="footer-bottom-line">
-                <span class="legal-text">P.IVA 01234567890 | Dopamina Smash Burger © 2026</span>
+                <span class="legal-text">Verace Srls | P.IVA 06136470652 | Dopamina Smash Burger © 2026 | <a href="privacy.html" class="info-link">Privacy Policy</a></span>
                 <span class="credits-text">All rights reserved.</span>
             </div>
         </div>
@@ -585,9 +611,33 @@
 
     <!-- Mobile-First Sticky Delivery Bar -->
     <div class="mobile-sticky-bar" id="mobile-delivery-bar">
-        <a href="https://www.glovoapp.com/it/it/salerno/dopamina-smash-burger-sln/" target="_blank" rel="noopener noreferrer" class="mobile-cta-btn" data-it="ORDINA DELIVERY (GLOVO)" data-en="ORDER DELIVERY (GLOVO)">
-            ORDINA DELIVERY (GLOVO)
+        <a href="#" class="mobile-cta-btn" data-it="ORDINA DELIVERY" data-en="ORDER DELIVERY">
+            ORDINA DELIVERY
         </a>
+    </div>
+
+    <!-- Delivery Modal Popup -->
+    <div id="delivery-modal" class="delivery-modal" aria-hidden="true" role="dialog">
+        <div class="modal-overlay" id="modal-overlay"></div>
+        <div class="modal-content">
+            <button class="modal-close-btn" id="modal-close" aria-label="Chiudi Finestra">&times;</button>
+            <h3 class="modal-title" data-it="ORDINA ONLINE" data-en="ORDER ONLINE">ORDINA ONLINE</h3>
+            <p class="modal-subtitle" data-it="Seleziona la tua piattaforma di delivery preferita:" data-en="Choose your favorite delivery platform:">Seleziona la tua piattaforma di delivery preferita:</p>
+            <div class="delivery-options-grid">
+                <a href="https://glovoapp.com/it/it/salerno/stores/dopamina-smashburger-qsr" target="_blank" rel="noopener noreferrer" class="delivery-card glovo-card">
+                    <div class="delivery-logo-container">
+                        <span class="delivery-brand-text">GLOVO</span>
+                    </div>
+                    <span class="delivery-action-text" data-it="Ordina su Glovo" data-en="Order on Glovo">Ordina su Glovo</span>
+                </a>
+                <a href="https://deliveroo.it/it/menu/napoli/salerno/dopamina-smash-burger-piazza-gioia-flavio-2" target="_blank" rel="noopener noreferrer" class="delivery-card deliveroo-card">
+                    <div class="delivery-logo-container">
+                        <span class="delivery-brand-text">DELIVEROO</span>
+                    </div>
+                    <span class="delivery-action-text" data-it="Ordina su Deliveroo" data-en="Order on Deliveroo">Ordina su Deliveroo</span>
+                </a>
+            </div>
+        </div>
     </div>
 
     <!-- Leaflet JS for custom monochrome map -->

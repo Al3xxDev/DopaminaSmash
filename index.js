@@ -165,9 +165,23 @@ document.addEventListener('DOMContentLoaded', () => {
         // Add marker to map
         L.marker([latitude, longitude], { icon: customIcon }).addTo(map)
             .bindPopup(`
-                <div style="font-family: 'Space Mono', monospace; padding: 5px; color: #111111;">
-                    <strong style="font-size: 14px; text-transform: uppercase; color: #E02020;">Dopamina Smash</strong><br>
-                    <span style="font-size: 11px; color: #555555;">Piazza Flavio Gioia, 2 - Salerno</span>
+                <div style="font-family: 'Space Mono', monospace; padding: 5px; color: #111111; text-align: center;">
+                    <strong style="font-size: 14px; text-transform: uppercase; color: #E02020; display: block; margin-bottom: 2px;">Dopamina Smash</strong>
+                    <span style="font-size: 11px; color: #555555; display: block; margin-bottom: 8px;">Piazza Flavio Gioia, 2 - Salerno</span>
+                    <a href="https://maps.app.goo.gl/NZU2qP6i4Zhkw6R87" target="_blank" rel="noopener noreferrer" style="
+                        display: inline-block;
+                        background-color: #E02020;
+                        color: #ffffff;
+                        padding: 6px 12px;
+                        font-size: 10px;
+                        font-weight: 700;
+                        text-transform: uppercase;
+                        border-radius: 4px;
+                        text-decoration: none;
+                        transition: background-color 0.2s ease;
+                    " onmouseover="this.style.backgroundColor='#C01010'" onmouseout="this.style.backgroundColor='#E02020'">
+                        Apri in Google Maps
+                    </a>
                 </div>
             `)
             .openPopup();
@@ -203,6 +217,98 @@ document.addEventListener('DOMContentLoaded', () => {
                     el.textContent = el.getAttribute(`data-${currentLang}`);
                 }
             });
+        });
+    }
+
+    // ==========================================================================
+    // 6. MOBILE HAMBURGER MENU TOGGLE
+    // ==========================================================================
+    const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+    
+    if (mobileMenuToggle && mobileMenu) {
+        const mobileLinks = mobileMenu.querySelectorAll('.mobile-nav-link, .mobile-nav-cta');
+        
+        const toggleMenu = () => {
+            mobileMenuToggle.classList.toggle('active');
+            mobileMenu.classList.toggle('active');
+            document.body.classList.toggle('mobile-menu-open');
+        };
+        
+        mobileMenuToggle.addEventListener('click', toggleMenu);
+        
+        // Close menu and smooth scroll when clicking any link
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                const href = link.getAttribute('href');
+                
+                // If it's an external link let it behave normally
+                if (href.startsWith('http')) {
+                    toggleMenu();
+                    return;
+                }
+                
+                // If it is a dummy link (like order button trigger), don't attempt to scroll
+                if (href === '#' || href.startsWith('javascript')) {
+                    toggleMenu();
+                    return;
+                }
+                
+                e.preventDefault();
+                toggleMenu();
+                
+                const targetElement = document.querySelector(href);
+                if (targetElement) {
+                    const offsetPosition = targetElement.offsetTop - 70; // Offset mobile header height
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    }
+
+    // ==========================================================================
+    // 7. DELIVERY PLATFORM SELECTOR MODAL
+    // ==========================================================================
+    const deliveryModal = document.getElementById('delivery-modal');
+    const modalOverlay = document.getElementById('modal-overlay');
+    const modalClose = document.getElementById('modal-close');
+    const orderTriggers = document.querySelectorAll('#header-ordina-cta, .mobile-nav-cta, #btn-hero-delivery, .mobile-cta-btn');
+
+    if (deliveryModal && modalOverlay && modalClose) {
+        const openModal = (e) => {
+            e.preventDefault();
+            deliveryModal.classList.add('modal-active');
+            document.body.classList.add('modal-open');
+        };
+
+        const closeModal = () => {
+            deliveryModal.classList.remove('modal-active');
+            document.body.classList.remove('modal-open');
+        };
+
+        // Bind click events to all "Ordina" triggers
+        orderTriggers.forEach(btn => {
+            btn.addEventListener('click', openModal);
+        });
+
+        // Close events
+        modalClose.addEventListener('click', closeModal);
+        modalOverlay.addEventListener('click', closeModal);
+
+        // Also close when clicking a delivery card (so it doesn't stay open behind the new window)
+        const deliveryCards = deliveryModal.querySelectorAll('.delivery-card');
+        deliveryCards.forEach(card => {
+            card.addEventListener('click', closeModal);
+        });
+        
+        // Escape key close
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && deliveryModal.classList.contains('modal-active')) {
+                closeModal();
+            }
         });
     }
 });
