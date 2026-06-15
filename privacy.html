@@ -3,6 +3,18 @@
 
 <head>
     <meta charset="UTF-8">
+    <!-- Prevent third-party scripts (like Leaflet) from blocking back/forward cache (bfcache) -->
+    <script>
+        (function(w) {
+            const originalAddEventListener = w.addEventListener;
+            w.addEventListener = function(type, listener, options) {
+                if (type === 'unload') {
+                    return;
+                }
+                originalAddEventListener.apply(this, arguments);
+            };
+        })(window);
+    </script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     
     <!-- SEO Meta Tags -->
@@ -16,11 +28,18 @@
     <!-- Google Fonts: Space Mono (Regular & Bold) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap"
-        rel="stylesheet">
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet"></noscript>
+
+    <!-- Preload custom local font to prevent layout shifts -->
+    <link rel="preload" href="assets/fonts/Sink-Regular.woff2" as="font" type="font/woff2" crossorigin>
+
+    <!-- Preload heavy background assets to prevent layout/visual flash -->
+    <link rel="preload" as="image" href="assets/bg-chat.webp">
 
     <!-- Core CSS -->
-    <link rel="stylesheet" href="index.css">
+    <link rel="preload" href="index.min.css?v=2" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="index.min.css?v=2"></noscript>
 </head>
 
 <body class="privacy-body">
@@ -42,13 +61,16 @@
                     </g>
                 </svg>
             </a>
+            <div class="header-cta" style="margin-left: auto;">
+                <button class="lang-switch-btn" id="lang-switch" aria-label="Switch to English"><img src="assets/menu/english-menu.webp" alt="English Menu" class="lang-icon" width="26" height="26"></button>
+            </div>
         </div>
     </header>
 
     <!-- Main Content Container -->
     <main class="privacy-page">
         <div class="privacy-container">
-            <a href="index.html" class="privacy-back-link" aria-label="Torna alla Home">
+            <a href="index.html" class="privacy-back-link" aria-label="Torna alla Home" data-it="TORNA ALLA HOME" data-en="BACK TO HOME">
                 <svg width="18" height="12" viewBox="0 0 18 12" fill="none" xmlns="http://www.w3.org/2000/svg" style="transform: scaleX(-1);">
                     <path d="M12 1L17 6L12 11M17 6H1" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
@@ -56,16 +78,16 @@
             </a>
 
             <div class="privacy-title-block">
-                <h1 class="privacy-title">Privacy Policy</h1>
-                <p class="privacy-subtitle">Informativa sul trattamento dei dati personali</p>
+                <h1 class="privacy-title" data-it="Privacy Policy" data-en="Privacy Policy">Privacy Policy</h1>
+                <p class="privacy-subtitle" data-it="Informativa sul trattamento dei dati personali" data-en="Information on the processing of personal data">Informativa sul trattamento dei dati personali</p>
             </div>
 
             <article class="privacy-content">
-                <p>La presente informativa ha lo scopo di descrivere le modalità di gestione del sito internet <strong>dopaminaburger.it</strong> (di seguito: il “Sito”) con riferimento al trattamento dei dati personali degli utenti.</p>
+                <p data-it="La presente informativa ha lo scopo di descrivere le modalità di gestione del sito internet &lt;strong&gt;dopaminaburger.it&lt;/strong&gt; (di seguito: il “Sito”) con riferimento al trattamento dei dati personali degli utenti." data-en="This privacy policy document describes the management methods of the website &lt;strong&gt;dopaminaburger.it&lt;/strong&gt; (hereinafter: the 'Site') with reference to the processing of personal data of users.">La presente informativa ha lo scopo di descrivere le modalità di gestione del sito internet <strong>dopaminaburger.it</strong> (di seguito: il “Sito”) con riferimento al trattamento dei dati personali degli utenti.</p>
 
-                <p>Si tratta di una informativa generale resa, nel rispetto dell’art. 13 del Regolamento (UE) 2016/679 relativo alla protezione delle persone fisiche con riguardo al trattamento dei dati personali, nonché alla libera circolazione di tali dati (di seguito: il “Regolamento”), a tutti gli utenti che consultano e/o si registrano e, più in generale, interagiscono con i servizi offerti attraverso il Sito.</p>
+                <p data-it="Si tratta di una informativa generale resa, nel rispetto dell’art. 13 del Regolamento (UE) 2016/679 relativo alla protezione delle persone fisiche con riguardo al trattamento dei dati personali, nonché alla libera circolazione di tali dati (di seguito: il “Regolamento”), a tutti gli utenti che consultano e/o si registrano e, più in generale, interagiscono con i servizi offerti attraverso il Sito." data-en="This is a general information disclosure, provided in compliance with Art. 13 of Regulation (EU) 2016/679 on the protection of natural persons with regard to the processing of personal data and on the free movement of such data (hereinafter: the 'Regulation'), to all users who consult and/or register and, more generally, interact with the services offered through the Site.">Si tratta di una informativa generale resa, nel rispetto dell’art. 13 del Regolamento (UE) 2016/679 relativo alla protezione delle persone fisiche con riguardo al trattamento dei dati personali, nonché alla libera circolazione di tali dati (di seguito: il “Regolamento”), a tutti gli utenti che consultano e/o si registrano e, più in generale, interagiscono con i servizi offerti attraverso il Sito.</p>
 
-                <p>
+                <p data-it="&lt;strong&gt;Titolare del trattamento dei dati è:&lt;/strong&gt;&lt;br&gt;Verace Srls,&lt;br&gt;Via Antonio Maria De Luca 4,&lt;br&gt;Salerno 84121&lt;br&gt;P.iva 06136470652&lt;br&gt;Email: &lt;a href='mailto:amministrazione@dopaminaburger.it' class='info-link'&gt;amministrazione@dopaminaburger.it&lt;/a&gt;" data-en="&lt;strong&gt;Data Controller is:&lt;/strong&gt;&lt;br&gt;Verace Srls,&lt;br&gt;Via Antonio Maria De Luca 4,&lt;br&gt;Salerno 84121&lt;br&gt;VAT Number 06136470652&lt;br&gt;Email: &lt;a href='mailto:amministrazione@dopaminaburger.it' class='info-link'&gt;amministrazione@dopaminaburger.it&lt;/a&gt;">
                     <strong>Titolare del trattamento dei dati è:</strong><br>
                     Verace Srls,<br>
                     Via Antonio Maria De Luca 4,<br>
@@ -74,89 +96,89 @@
                     Email: <a href="mailto:amministrazione@dopaminaburger.it" class="info-link">amministrazione@dopaminaburger.it</a>
                 </p>
 
-                <p>In questa informativa Le illustreremo le finalità e le modalità con cui il Titolare raccoglie e tratta i suoi dati personali, quali categorie di dati sono oggetto di tratamento, quali sono i diritti degli interessati e come possono essere esercitati.</p>
+                <p data-it="In questa informativa Le illustreremo le finalità e le modalità con cui il Titolare raccoglie e tratta i suoi dati personali, quali categorie di dati sono oggetto di trattamento, quali sono i diritti degli interessati e come possono essere esercitati." data-en="In this privacy document, we will explain the purposes and methods by which the Data Controller collects and processes your personal data, which categories of data are processed, what the rights of the data subjects are, and how they can be exercised.">In questa informativa Le illustreremo le finalità e le modalità con cui il Titolare raccoglie e tratta i suoi dati personali, quali categorie di dati sono oggetto di tratamento, quali sono i diritti degli interessati e come possono essere esercitati.</p>
 
-                <p>L’informativa è resa esclusivamente per il presente Sito; pertanto il Titolare non si assume alcuna responsabilità in merito agli altri siti web eventualmente consultati tramite collegamenti ipertestuali presenti sul Sito stesso.</p>
+                <p data-it="L’informativa è resa esclusivamente per il presente Sito; pertanto il Titolare non si assume alcuna responsabilità in merito agli altri siti web eventualmente consultati tramite collegamenti ipertestuali presenti sul Sito stesso." data-en="This policy is provided exclusively for this Site; therefore, the Data Controller assumes no responsibility for other websites that may be consulted through hyperlinks on the Site.">L’informativa è resa esclusivamente per il presente Sito; pertanto il Titolare non si assume alcuna responsabilità in merito agli altri siti web eventualmente consultati tramite collegamenti ipertestuali presenti sul Sito stesso.</p>
 
-                <p>Gli utenti sono invitati a prendere visione della presente informativa prima di fornire informazioni personali di qualsiasi genere.</p>
+                <p data-it="Gli utenti sono invitati a prendere visione della presente informativa prima di fornire informazioni personali di qualsiasi genere." data-en="Users are invited to read this information policy before providing personal information of any kind.">Gli utenti sono invitati a prendere visione della presente informativa prima di fornire informazioni personali di qualsiasi genere.</p>
 
-                <h2>Categorie di dati personali</h2>
+                <h2 data-it="Categorie di dati personali" data-en="Categories of personal data">Categorie di dati personali</h2>
 
-                <h3>Dati di navigazione</h3>
-                <p>I sistemi informatici e le procedure software preposte al funzionamento di questo Sito acquisiscono, nel corso del loro normale esercizio, alcuni dati personali la cui trasmissione è implicita nell’uso dei protocolli di comunicazione di Internet.</p>
-                <p>Si tratta di informazioni che non sono raccolte per essere associate a interessati identificati, ma che per loro stessa natura potrebbero, attraverso elaborazioni ed associazioni con dati detenuti da terzi, permettere di identificare gli utenti.</p>
+                <h3 data-it="Dati di navigazione" data-en="Navigation data">Dati di navigazione</h3>
+                <p data-it="I sistemi informatici e le procedure software preposte al funzionamento di questo Sito acquisiscono, nel corso del loro normale esercizio, alcuni dati personali la cui trasmissione è implicita nell’uso dei protocolli di comunicazione di Internet." data-en="The computer systems and software procedures used to operate this Site acquire, during their normal operation, some personal data whose transmission is implicit in the use of Internet communication protocols.">I sistemi informatici e le procedure software preposte al funzionamento di questo Sito acquisiscono, nel corso del loro normale esercizio, alcuni dati personali la cui trasmissione è implicita nell’uso dei protocolli di comunicazione di Internet.</p>
+                <p data-it="Si tratta di informazioni che non sono raccolte per essere associate a interessati identificati, ma che per loro stessa natura potrebbero, attraverso elaborazioni ed associazioni con dati detenuti da terzi, permettere di identificare gli utenti." data-en="This information is not collected to be associated with identified data subjects, but by its very nature could, through processing and association with data held by third parties, allow users to be identified.">Si tratta di informazioni che non sono raccolte per essere associate a interessati identificati, ma che per loro stessa natura potrebbero, attraverso elaborazioni ed associazioni con dati detenuti da terzi, permettere di identificare gli utenti.</p>
                 
-                <p>In questa categoria di dati rientrano, a titolo esemplificativo:</p>
+                <p data-it="In questa categoria di dati rientrano, a titolo esemplificativo:" data-en="This category of data includes, by way of example:">In questa categoria di dati rientrano, a titolo esemplificativo:</p>
                 <ul>
-                    <li>indirizzi IP o nomi a dominio dei dispositivi utilizzati;</li>
-                    <li>indirizzi URI delle risorse richieste;</li>
-                    <li>orario della richiesta;</li>
-                    <li>metodo utilizzato nel sottoporre la richiesta al server;</li>
-                    <li>dimensione del file ottenuto in risposta;</li>
-                    <li>codice numerico indicante lo stato della risposta del server;</li>
-                    <li>parametri relativi al sistema operativo e all’ambiente informatico dell’utente.</li>
+                    <li data-it="indirizzi IP o nomi a dominio dei dispositivi utilizzati;" data-en="IP addresses or domain names of the devices used;">indirizzi IP o nomi a dominio dei dispositivi utilizzati;</li>
+                    <li data-it="indirizzi URI delle risorse richieste;" data-en="URI addresses of the requested resources;">indirizzi URI delle risorse richieste;</li>
+                    <li data-it="orario della richiesta;" data-en="time of the request;">orario della richiesta;</li>
+                    <li data-it="metodo utilizzato nel sottoporre la richiesta al server;" data-en="method used to submit the request to the server;">metodo utilizzato nel sottoporre la richiesta al server;</li>
+                    <li data-it="dimensione del file ottenuto in risposta;" data-en="size of the file obtained in response;">dimensione del file ottenuto in risposta;</li>
+                    <li data-it="codice numerico indicante lo stato della risposta del server;" data-en="numerical code indicating the status of the server response;">codice numerico indicante lo stato della risposta del server;</li>
+                    <li data-it="parametri relativi al sistema operativo e all’ambiente informatico dell’utente." data-en="parameters relating to the user's operating system and computer environment.">parametri relativi al sistema operativo e all’ambiente informatico dell’utente.</li>
                 </ul>
-                <p>Questi dati vengono utilizzati al solo fine di ricavare informazioni statistiche anonime sull’uso del Sito e per controllarne il corretto funzionamento e vengono cancellati immediatamente dopo l’elaborazione. I dati potrebbero essere utilizzati per l’accertamento di responsabilità in caso di ipotetici reati informatici ai danni del Sito.</p>
+                <p data-it="Questi dati vengono utilizzati al solo fine di ricavare informazioni statistiche anonime sull’uso del Sito e per controllarne il corretto funzionamento e vengono cancellati immediatamente dopo l’elaborazione. I dati potrebbero essere utilizzati per l’accertamento di responsabilità in caso di ipotetici reati informatici ai danni del Sito." data-en="This data is used solely for the purpose of obtaining anonymous statistical information on the use of the Site and to check its correct functioning, and is deleted immediately after processing. The data could be used to ascertain responsibility in case of hypothetical computer crimes against the Site.">Questi dati vengono utilizzati al solo fine di ricavare informazioni statistiche anonime sull’uso del Sito e per controllarne il corretto funzionamento e vengono cancellati immediatamente dopo l’elaborazione. I dati potrebbero essere utilizzati per l’accertamento di responsabilità in caso di ipotetici reati informatici ai danni del Sito.</p>
 
-                <h3>Dati forniti volontariamente dall’utente</h3>
-                <p>Fatto salvo quanto sopra specificato in relazione ai dati di navigazione, il Titolare acquisirà i dati personali forniti volontariamente dall’utente per:</p>
+                <h3 data-it="Dati forniti volontariamente dall’utente" data-en="Data provided voluntarily by the user">Dati forniti volontariamente dall’utente</h3>
+                <p data-it="Fatto salvo quanto sopra specificato in relazione ai dati di navigazione, il Titolare acquisirà i dati personali forniti volontariamente dall’utente per:" data-en="Without prejudice to what is specified above in relation to navigation data, the Data Controller will acquire personal data voluntarily provided by the user for:">Fatto salvo quanto sopra specificato in relazione ai dati di navigazione, il Titolare acquisirà i dati personali forniti volontariamente dall’utente per:</p>
                 <ul>
-                    <li>registrazione e creazione di un account;</li>
-                    <li>gestione delle richieste via e-mail;</li>
-                    <li>compilazione del modulo contatti;</li>
-                    <li>contatto telefonico con il servizio clienti.</li>
+                    <li data-it="registrazione e creazione di un account;" data-en="registration and creation of an account;">registrazione e creazione di un account;</li>
+                    <li data-it="gestione delle richieste via e-mail;" data-en="management of requests via email;">gestione delle richieste via e-mail;</li>
+                    <li data-it="compilazione del modulo contatti;" data-en="filling out the contact form;">compilazione del modulo contatti;</li>
+                    <li data-it="contatto telefonico con il servizio clienti." data-en="telephone contact with customer service.">contatto telefonico con il servizio clienti.</li>
                 </ul>
-                <p>A titolo esemplificativo, potranno essere raccolti: nome, cognome, lingua e indirizzo e-mail.</p>
-                <p>Ogni altra informazione volontariamente fornita sarà trattata secondo i principi di correttezza, trasparenza e pertinenza, in conformità alla normativa vigente.</p>
-                <p>Qualora vengano forniti dati personali di terzi, ciò avverrà sotto esclusiva responsabilità dell’utente, che garantisce di avere il diritto di comunicarli.</p>
+                <p data-it="A titolo esemplificativo, potranno essere raccolti: nome, cognome, lingua e indirizzo e-mail." data-en="By way of example, the following may be collected: name, surname, language, and email address.">A titolo esemplificativo, potranno essere raccolti: nome, cognome, lingua e indirizzo e-mail.</p>
+                <p data-it="Ogni altra informazione volontariamente fornita sarà trattata secondo i principi di correttezza, trasparenza e pertinenza, in conformità alla normativa vigente." data-en="Any other voluntarily provided information will be processed in accordance with the principles of fairness, transparency, and relevance, in compliance with current legislation.">Ogni altra informazione volontariamente fornita sarà trattata secondo i principi di correttezza, trasparenza e pertinenza, in conformità alla normativa vigente.</p>
+                <p data-it="Qualora vengano forniti dati personali di terzi, ciò avverrà sotto esclusiva responsabilità dell’utente, che garantisce di avere il diritto di comunicarli." data-en="If personal data of third parties is provided, this will be under the sole responsibility of the user, who guarantees they have the right to communicate it.">Qualora vengano forniti dati personali di terzi, ciò avverrà sotto esclusiva responsabilità dell’utente, che garantisce di avere il diritto di comunicarli.</p>
 
-                <h3>Dati acquisiti per servizi di prenotazione e newsletter</h3>
-                <p>Il Titolare acquisirà alcuni dati personali per la fruizione dei servizi offerti attraverso il Sito (es. iscrizione alla newsletter, prenotazioni online).</p>
-                <p>Potranno essere raccolti, a titolo esemplificativo:</p>
+                <h3 data-it="Dati acquisiti per servizi di prenotazione e newsletter" data-en="Data acquired for booking services and newsletters">Dati acquisiti per servizi di prenotazione e newsletter</h3>
+                <p data-it="Il Titolare acquisirà alcuni dati personali per la fruizione dei servizi offerti attraverso il Sito (es. iscrizione alla newsletter, prenotazioni online)." data-en="The Data Controller will acquire certain personal data for the use of the services offered through the Site (e.g., newsletter subscription, online bookings).">Il Titolare acquisirà alcuni dati personali per la fruizione dei servizi offerti attraverso il Sito (es. iscrizione alla newsletter, prenotazioni online).</p>
+                <p data-it="Potranno essere raccolti, a titolo esemplificativo:" data-en="By way of example, the following may be collected:">Potranno essere raccolti, a titolo esemplificativo:</p>
                 <ul>
-                    <li>nome e cognome;</li>
-                    <li>indirizzo di spedizione e fatturazione;</li>
-                    <li>dati relativi al pagamento;</li>
-                    <li>indirizzo e-mail.</li>
+                    <li data-it="nome e cognome;" data-en="name and surname;">nome e cognome;</li>
+                    <li data-it="indirizzo di spedizione e fatturazione;" data-en="shipping and billing address;">indirizzo di spedizione e fatturazione;</li>
+                    <li data-it="dati relativi al pagamento;" data-en="payment details;">dati relativi al pagamento;</li>
+                    <li data-it="indirizzo e-mail." data-en="email address.">indirizzo e-mail.</li>
                 </ul>
-                <p>Il Titolare non acquisirà dati appartenenti a categorie particolari ai sensi dell’art. 9 del Regolamento UE 2016/679. Eventuali dati sensibili forniti volontariamente saranno trattati esclusivamente per rispondere alle richieste dell’utente.</p>
+                <p data-it="Il Titolare non acquisirà dati appartenenti a categorie particolari ai sensi dell’art. 9 del Regolamento UE 2016/679. Eventuali dati sensibili forniti volontariamente saranno trattati esclusivamente per rispondere alle richieste dell’utente." data-en="The Data Controller will not acquire data belonging to special categories pursuant to Art. 9 of EU Regulation 2016/679. Any sensitive data voluntarily provided will be processed exclusively to respond to the user's requests.">Il Titolare non acquisirà dati appartenenti a categorie particolari ai sensi dell’art. 9 del Regolamento UE 2016/679. Eventuali dati sensibili forniti volontariamente saranno trattati esclusivamente per rispondere alle richieste dell’utente.</p>
 
-                <h2>Minori</h2>
-                <p>I servizi del Sito sono destinati a un pubblico maggiorenne. Qualora l’interessato sia minorenne, il trattamento dei dati è lecito solo se il consenso è prestato o autorizzato dal titolare della responsabilità genitoriale.</p>
+                <h2 data-it="Minori" data-en="Minors">Minori</h2>
+                <p data-it="I servizi del Sito sono destinati a un pubblico maggiorenne. Qualora l’interessato sia minorenne, il trattamento dei dati è lecito solo se il consenso è prestato o autorizzato dal titolare della responsabilità genitoriale." data-en="The Site's services are intended for an adult audience. If the data subject is a minor, data processing is lawful only if consent is given or authorized by the holder of parental responsibility.">I servizi del Sito sono destinati a un pubblico maggiorenne. Qualora l’interessato sia minorenne, il trattamento dei dati è lecito solo se il consenso è prestato o autorizzato dal titolare della responsabilità genitoriale.</p>
 
-                <h2>Finalità e base giuridica del trattamento</h2>
+                <h2 data-it="Finalità e base giuridica del trattamento" data-en="Purposes and legal basis of processing">Finalità e base giuridica del trattamento</h2>
                 
-                <h3>Erogazione dei servizi</h3>
-                <p>I dati saranno trattati per consentire la registrazione al Sito e l’erogazione dei servizi richiesti, sulla base del consenso dell’utente o dell’esecuzione del contratto.</p>
+                <h3 data-it="Erogazione dei servizi" data-en="Provision of services">Erogazione dei servizi</h3>
+                <p data-it="I dati saranno trattati per consentire la registrazione al Sito e l’erogazione dei servizi richiesti, sulla base del consenso dell’utente o dell’esecuzione del contratto." data-en="The data will be processed to allow registration to the Site and the provision of the requested services, on the basis of the user's consent or the execution of the contract.">I dati saranno trattati per consentire la registrazione al Sito e l’erogazione dei servizi richiesti, sulla base del consenso dell’utente o dell’esecuzione del contratto.</p>
 
-                <h3>Finalità di marketing</h3>
-                <p>Previo consenso, i dati potranno essere utilizzati per l’invio di comunicazioni commerciali tramite sistemi automatizzati e tradizionali. Il consenso è revocabile in qualsiasi momento scrivendo a <a href="mailto:amministrazione@dopaminaburger.it" class="info-link">amministrazione@dopaminaburger.it</a>.</p>
+                <h3 data-it="Finalità di marketing" data-en="Marketing purposes">Finalità di marketing</h3>
+                <p data-it="Previo consenso, i dati potranno essere utilizzati per l’invio di comunicazioni commerciali tramite sistemi automatizzati e tradizionali. Il consenso è revocabile in qualsiasi momento scrivendo a &lt;a href='mailto:amministrazione@dopaminaburger.it' class='info-link'&gt;amministrazione@dopaminaburger.it&lt;/a&gt;." data-en="Subject to consent, the data may be used to send commercial communications through automated and traditional systems. Consent is revocable at any time by writing to &lt;a href='mailto:amministrazione@dopaminaburger.it' class='info-link'&gt;amministrazione@dopaminaburger.it&lt;/a&gt;.">Previo consenso, i dati potranno essere utilizzati per l’invio di comunicazioni commerciali tramite sistemi automatizzati e tradizionali. Il consenso è revocabile in qualsiasi momento scrivendo a <a href="mailto:amministrazione@dopaminaburger.it" class="info-link">amministrazione@dopaminaburger.it</a>.</p>
 
-                <h3>Finalità di profilazione</h3>
-                <p>Previo consenso, i dati potranno essere utilizzati per analizzare abitudini e preferenze al fine di offrire prodotti e servizi personalizzati.</p>
+                <h3 data-it="Finalità di profilazione" data-en="Profiling purposes">Finalità di profilazione</h3>
+                <p data-it="Previo consenso, i dati potranno essere utilizzati per analizzare abitudini e preferenze al fine di offrire prodotti e servizi personalizzati." data-en="Subject to consent, the data may be used to analyze habits and preferences in order to offer customized products and services.">Previo consenso, i dati potranno essere utilizzati per analizzare abitudini e preferenze al fine di offrire prodotti e servizi personalizzati.</p>
 
-                <h2>Modalità e luogo del trattamento</h2>
-                <p>Il trattamento dei dati avviene con strumenti idonei a garantire sicurezza e riservatezza. I dati sono trattati all’interno dello Spazio Economico Europeo.</p>
+                <h2 data-it="Modalità e luogo del trattamento" data-en="Methods and place of processing">Modalità e luogo del trattamento</h2>
+                <p data-it="Il trattamento dei dati avviene con strumenti idonei a garantire sicurezza e riservatezza. I dati sono trattati all’interno dello Spazio Economico Europeo." data-en="Data processing is carried out using suitable tools to guarantee security and confidentiality. The data is processed within the European Economic Area.">Il trattamento dei dati avviene con strumenti idonei a garantire sicurezza e riservatezza. I dati sono trattati all’interno dello Spazio Economico Europeo.</p>
 
-                <h2>Comunicazione dei dati a terzi</h2>
-                <p>I dati personali potranno essere comunicati a soggetti terzi che operano come Responsabili del trattamento per finalità connesse all’erogazione dei servizi.</p>
+                <h2 data-it="Comunicazione dei dati a terzi" data-en="Communication of data to third parties">Comunicazione dei dati a terzi</h2>
+                <p data-it="I dati personali potranno essere comunicati a soggetti terzi che operano come Responsabili del trattamento per finalità connesse all’erogazione dei servizi." data-en="Personal data may be communicated to third parties operating as Data Processors for purposes related to the provision of services.">I dati personali potranno essere comunicati a soggetti terzi che operano come Responsabili del trattamento per finalità connesse all’erogazione dei servizi.</p>
 
-                <h2>Periodo di conservazione</h2>
-                <p>I dati saranno conservati per tutta la durata del rapporto contrattuale e successivamente per 10 anni per obblighi di legge. I dati di profilazione saranno conservati per un massimo di 12 mesi.</p>
+                <h2 data-it="Periodo di conservazione" data-en="Retention period">Periodo di conservazione</h2>
+                <p data-it="I dati saranno conservati per tutta la durata del rapporto contrattuale e successivamente per 10 anni per obblighi di legge. I dati di profilazione saranno conservati per un massimo di 12 mesi." data-en="Data will be stored for the entire duration of the contractual relationship and subsequently for 10 years for legal obligations. Profiling data will be stored for a maximum of 12 months.">I dati saranno conservati per tutta la durata del rapporto contrattuale e successivamente per 10 anni per obblighi di legge. I dati di profilazione saranno conservati per un massimo di 12 mesi.</p>
 
-                <h2>Diritti dell’interessato</h2>
-                <p>L'interessato ha il diritto di richiedere al Titolare:</p>
+                <h2 data-it="Diritti dell’interessato" data-en="Rights of the data subject">Diritti dell’interessato</h2>
+                <p data-it="L'interessato ha il diritto di richiedere al Titolare:" data-en="The data subject has the right to request from the Data Controller:">L'interessato ha il diritto di richiedere al Titolare:</p>
                 <ul>
-                    <li>Accesso ai propri dati personali;</li>
-                    <li>Portabilità dei dati;</li>
-                    <li>Rettifica dei dati;</li>
-                    <li>Cancellazione o limitazione del trattamento;</li>
-                    <li>Opposizione al trattamento.</li>
+                    <li data-it="Accesso ai propri dati personali;" data-en="Access to their personal data;">Accesso ai propri dati personali;</li>
+                    <li data-it="Portabilità dei dati;" data-en="Data portability;">Portabilità dei dati;</li>
+                    <li data-it="Rettifica dei dati;" data-en="Rectification of data;">Rettifica dei dati;</li>
+                    <li data-it="Cancellazione o limitazione del trattamento;" data-en="Deletion or limitation of processing;">Cancellazione o limitazione del trattamento;</li>
+                    <li data-it="Opposizione al trattamento." data-en="Objection to processing.">Opposizione al trattamento.</li>
                 </ul>
-                <p>Le richieste possono essere inviate a <a href="mailto:amministrazione@dopaminaburger.it" class="info-link">amministrazione@dopaminaburger.it</a>.</p>
+                <p data-it="Le richieste possono essere inviate a &lt;a href='mailto:amministrazione@dopaminaburger.it' class='info-link'&gt;amministrazione@dopaminaburger.it&lt;/a&gt;." data-en="Requests can be sent to &lt;a href='mailto:amministrazione@dopaminaburger.it' class='info-link'&gt;amministrazione@dopaminaburger.it&lt;/a&gt;.">Le richieste possono essere inviate a <a href="mailto:amministrazione@dopaminaburger.it" class="info-link">amministrazione@dopaminaburger.it</a>.</p>
 
-                <h2>Modifiche alla presente informativa</h2>
-                <p>Il Titolare si riserva il diritto di modificare la presente Informativa in qualsiasi momento. Le modifiche saranno pubblicate sul Sito e avranno effetto immediato.</p>
+                <h2 data-it="Modifiche alla presente informativa" data-en="Changes to this privacy policy">Modifiche alla presente informativa</h2>
+                <p data-it="Il Titolare si riserva il diritto di modificare la presente Informativa in qualsiasi momento. Le modifiche saranno pubblicate sul Sito e avranno effetto immediato." data-en="The Data Controller reserves the right to modify this Privacy Policy at any time. Changes will be published on the Site and will take effect immediately.">Il Titolare si riserva il diritto di modificare la presente Informativa in qualsiasi momento. Le modifiche saranno pubblicate sul Sito e avranno effetto immediato.</p>
             </article>
         </div>
     </main>
@@ -171,6 +193,8 @@
         </div>
     </footer>
 
+    <!-- Core JS -->
+    <script src="index.min.js?v=2" defer></script>
 </body>
 
 </html>

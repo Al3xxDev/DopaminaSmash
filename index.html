@@ -3,6 +3,18 @@
 
 <head>
     <meta charset="UTF-8">
+    <!-- Prevent third-party scripts (like Leaflet) from blocking back/forward cache (bfcache) -->
+    <script>
+        (function(w) {
+            const originalAddEventListener = w.addEventListener;
+            w.addEventListener = function(type, listener, options) {
+                if (type === 'unload') {
+                    return;
+                }
+                originalAddEventListener.apply(this, arguments);
+            };
+        })(window);
+    </script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 
     <!-- SEO Meta Tags -->
@@ -16,7 +28,7 @@
     <meta property="og:title" content="Dopamina Smash Burger - Salerno">
     <meta property="og:description"
         content="Start Your Trip. Smash Your Brain. Scopri il vero smash burger a Salerno con ingredienti freschi e croccanti.">
-    <meta property="og:image" content="assets/food/BurgerOverDose.png">
+    <meta property="og:image" content="assets/food/BurgerOverDose.webp">
     <meta property="og:url" content="https://dopaminasmash.it">
     <meta property="og:type" content="website">
 
@@ -26,15 +38,23 @@
     <!-- Google Fonts: Space Mono (Regular & Bold) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap"
-        rel="stylesheet">
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet"></noscript>
 
     <!-- Leaflet CSS for Monochrome styled map -->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    <link rel="preload" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""></noscript>
+
+    <!-- Preload custom local font to prevent layout shifts -->
+    <link rel="preload" href="assets/fonts/Sink-Regular.woff2" as="font" type="font/woff2" crossorigin>
+
+    <!-- Preload heavy background assets to prevent layout/visual flash -->
+    <link rel="preload" as="image" href="assets/bg-chat.webp">
+    <link rel="preload" as="image" href="assets/bg-popup.webp" fetchpriority="high">
 
     <!-- Core CSS -->
-    <link rel="stylesheet" href="index.css">
+    <link rel="preload" href="index.min.css?v=2" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="index.min.css?v=2"></noscript>
 </head>
 
 <body>
@@ -120,7 +140,7 @@
             </nav>
 
             <div class="header-cta">
-                <button class="lang-switch-btn" id="lang-switch" aria-label="Switch to English"><img src="assets/menu/english-menu.png" alt="English Menu" class="lang-icon"></button>
+                <button class="lang-switch-btn" id="lang-switch" aria-label="Switch to English"><img src="assets/menu/english-menu.webp" alt="English Menu" class="lang-icon" width="26" height="26"></button>
                 <a href="#" class="cta-button" id="header-ordina-cta" data-it="ORDINA ORA" data-en="ORDER NOW">ORDINA ORA</a>
                 <!-- Hamburger Button -->
                 <button class="hamburger-btn" id="mobile-menu-toggle" aria-label="Toggle Menu">
@@ -163,7 +183,7 @@
                 <div class="hero-visual-block">
                     <div class="burger-float-wrapper">
                         <!-- Hero video of the burger overdose -->
-                        <video class="hero-burger-img" id="hero-burger" autoplay loop muted playsinline>
+                        <video class="hero-burger-img" id="hero-burger" loop muted playsinline preload="none" width="720" height="1280">
                             <source src="assets/video/header.mp4" type="video/mp4">
                             Your browser does not support the video tag.
                         </video>
@@ -198,7 +218,7 @@
                     <!-- Smash Category -->
                     <div class="menu-category" id="smash">
                         <div class="category-header-line">
-                            <img src="assets/menu/burger.png" class="category-icon" alt="">
+                            <img src="assets/menu/burger.webp" class="category-icon" alt="" width="32" height="32">
                             <h3 class="category-name">SMASH</h3>
                         </div>
                         <div class="category-items-grid">
@@ -206,8 +226,8 @@
                             <!-- Item 1: Smash Standard -->
                             <div class="menu-item-row has-image">
                                 <div class="item-visual-preview">
-                                    <img src="assets/food/BurgerMono.png" alt="Smash Burger Monodose"
-                                        class="item-popup-img">
+                                    <img src="assets/food/BurgerMono.webp" alt="Smash Burger Monodose"
+                                        class="item-popup-img" width="450" height="450">
                                 </div>
                                 <div class="item-text">
                                     <div class="item-meta">
@@ -225,8 +245,8 @@
                             <!-- Item 2: Hot Smash Jam Monodose -->
                             <div class="menu-item-row has-image">
                                 <div class="item-visual-preview">
-                                    <img src="assets/food/HotSmashJamMono.png" alt="Hot Smash Jam Monodose"
-                                        class="item-popup-img">
+                                    <img src="assets/food/HotSmashJamMono.webp" alt="Hot Smash Jam Monodose"
+                                        class="item-popup-img" width="450" height="450">
                                 </div>
                                 <div class="item-text">
                                     <div class="item-meta">
@@ -240,8 +260,8 @@
                             <!-- Item 3: Hot Smash Jam Doppiadose -->
                             <div class="menu-item-row has-image">
                                 <div class="item-visual-preview">
-                                    <img src="assets/food/HotSmashJamDoppia.png" alt="Hot Smash Jam Doppiadose"
-                                        class="item-popup-img">
+                                    <img src="assets/food/HotSmashJamDoppia.webp" alt="Hot Smash Jam Doppiadose"
+                                        class="item-popup-img" width="450" height="450">
                                 </div>
                                 <div class="item-text">
                                     <div class="item-meta">
@@ -264,8 +284,8 @@
                                     <div class="special-card-right">
                                         <span class="special-price">€ 17,90</span>
                                         <div class="special-img-wrapper">
-                                            <img src="assets/food/BurgerMenu.png" alt="Smash Burger Menu"
-                                                class="special-menu-img">
+                                            <img src="assets/food/BurgerMenu.webp" alt="Smash Burger Menu"
+                                                class="special-menu-img" width="450" height="450">
                                         </div>
                                     </div>
                                 </div>
@@ -277,7 +297,7 @@
                     <!-- Baby Smash Category -->
                     <div class="menu-category" id="baby-smash">
                         <div class="category-header-line">
-                            <img src="assets/menu/burger.png" class="category-icon" alt="">
+                            <img src="assets/menu/burger.webp" class="category-icon" alt="" width="32" height="32">
                             <h3 class="category-name">BABY SMASH</h3>
                         </div>
                         <div class="category-items-grid">
@@ -285,8 +305,8 @@
                             <!-- Item 1: Baby Smash -->
                             <div class="menu-item-row has-image">
                                 <div class="item-visual-preview">
-                                    <img src="assets/food/BabyBurger.png" alt="Baby Smash Burger"
-                                        class="item-popup-img">
+                                    <img src="assets/food/BabyBurger.webp" alt="Baby Smash Burger"
+                                        class="item-popup-img" width="450" height="450">
                                 </div>
                                 <div class="item-text">
                                     <div class="item-meta">
@@ -306,7 +326,7 @@
                     <!-- Chicken Category -->
                     <div class="menu-category" id="chicken">
                         <div class="category-header-line">
-                            <img src="assets/menu/chicken.png" class="category-icon" alt="">
+                            <img src="assets/menu/chicken.webp" class="category-icon" alt="" width="32" height="32">
                             <h3 class="category-name">CHICKEN</h3>
                         </div>
                         <div class="category-items-grid">
@@ -314,7 +334,7 @@
                             <!-- Item 1: Chicken Standard -->
                             <div class="menu-item-row has-image">
                                 <div class="item-visual-preview">
-                                    <img src="assets/food/Chicken.png" alt="Chicken Burger" class="item-popup-img">
+                                    <img src="assets/food/Chicken.webp" alt="Chicken Burger" class="item-popup-img" width="450" height="450">
                                 </div>
                                 <div class="item-text">
                                     <div class="item-meta">
@@ -337,8 +357,8 @@
                                     <div class="special-card-right">
                                         <span class="special-price">€ 17,90</span>
                                         <div class="special-img-wrapper">
-                                            <img src="assets/food/ChcickenMenu.png" alt="Chicken Burger Menu"
-                                                class="special-menu-img">
+                                            <img src="assets/food/ChcickenMenu.webp" alt="Chicken Burger Menu"
+                                                class="special-menu-img" width="450" height="450">
                                         </div>
                                     </div>
                                 </div>
@@ -350,7 +370,7 @@
                     <!-- Veggie Category -->
                     <div class="menu-category" id="veggie">
                         <div class="category-header-line">
-                            <img src="assets/menu/veggie.png" class="category-icon" alt="">
+                            <img src="assets/menu/veggie.webp" class="category-icon" alt="" width="32" height="32">
                             <h3 class="category-name">VEGGIE</h3>
                         </div>
                         <div class="category-items-grid">
@@ -358,7 +378,7 @@
                             <!-- Item 1: Veggie Standard -->
                             <div class="menu-item-row has-image">
                                 <div class="item-visual-preview">
-                                    <img src="assets/food/Veggie.png" alt="Veggie Burger" class="item-popup-img">
+                                    <img src="assets/food/Veggie.webp" alt="Veggie Burger" class="item-popup-img" width="450" height="450">
                                 </div>
                                 <div class="item-text">
                                     <div class="item-meta">
@@ -381,8 +401,8 @@
                                     <div class="special-card-right">
                                         <span class="special-price">€ 17,90</span>
                                         <div class="special-img-wrapper">
-                                            <img src="assets/food/veggieMenu.png" alt="Veggie Burger Menu"
-                                                class="special-menu-img">
+                                            <img src="assets/food/veggieMenu.webp" alt="Veggie Burger Menu"
+                                                class="special-menu-img" width="450" height="450">
                                         </div>
                                     </div>
                                 </div>
@@ -397,7 +417,7 @@
                         <!-- Fried Column -->
                         <div class="menu-category" id="fried">
                             <div class="category-header-line">
-                                <img src="assets/menu/fried.png" class="category-icon" alt="">
+                                <img src="assets/menu/fried.webp" class="category-icon" alt="" width="32" height="32">
                                 <h3 class="category-name">FRIED</h3>
                             </div>
                             <div class="compact-items-list">
@@ -432,7 +452,7 @@
                         <!-- Dessert Column -->
                         <div class="menu-category" id="dessert">
                             <div class="category-header-line">
-                                <img src="assets/menu/dessert.png" class="category-icon" alt="">
+                                <img src="assets/menu/dessert.webp" class="category-icon" alt="" width="32" height="32">
                                 <h3 class="category-name">DESSERT</h3>
                             </div>
                             <div class="compact-items-list">
@@ -448,7 +468,7 @@
                         <!-- Drink Column -->
                         <div class="menu-category" id="drink">
                             <div class="category-header-line">
-                                <img src="assets/menu/drink.png" class="category-icon" alt="">
+                                <img src="assets/menu/drink.webp" class="category-icon" alt="" width="32" height="32">
                                 <h3 class="category-name">DRINK</h3>
                             </div>
                             <div class="compact-items-list">
@@ -476,7 +496,7 @@
                         <!-- Extra Column -->
                         <div class="menu-category" id="extra">
                             <div class="category-header-line">
-                                <img src="assets/menu/extra.png" class="category-icon" alt="">
+                                <img src="assets/menu/extra.webp" class="category-icon" alt="" width="32" height="32">
                                 <h3 class="category-name">EXTRA</h3>
                             </div>
                             <div class="compact-items-list">
@@ -543,8 +563,8 @@
                     </div>
                     <div class="vibe-visual-col">
                         <div class="image-gallery-container">
-                            <img src="assets/place/Cooking.jpg" alt="Smash cooking piastra" class="vibe-gallery-img">
-                            <img src="assets/place/place.jpg" alt="Dopamina locale" class="vibe-gallery-img">
+                            <img src="assets/place/Cooking.webp" alt="Smash cooking piastra" class="vibe-gallery-img" width="480" height="320">
+                            <img src="assets/place/place.webp" alt="Dopamina locale" class="vibe-gallery-img" width="480" height="320">
                         </div>
                     </div>
                 </div>
@@ -559,7 +579,7 @@
 
                     <div class="info-rows-container">
                         <div class="info-item">
-                            <h5 class="info-label" data-it="INDIRIZZO" data-en="ADDRESS">INDIRIZZO</h5>
+                            <h3 class="info-label" data-it="INDIRIZZO" data-en="ADDRESS">INDIRIZZO</h3>
                             <p class="info-value">
                                 <a href="https://maps.app.goo.gl/NZU2qP6i4Zhkw6R87" target="_blank" rel="noopener noreferrer" class="info-link">
                                     Piazza Flavio Gioia, 2 - Salerno (SA)
@@ -568,12 +588,12 @@
                         </div>
 
                         <div class="info-item">
-                            <h5 class="info-label" data-it="ORARI DI APERTURA" data-en="OPENING HOURS">ORARI DI APERTURA</h5>
+                            <h3 class="info-label" data-it="ORARI DI APERTURA" data-en="OPENING HOURS">ORARI DI APERTURA</h3>
                             <p class="info-value" data-it="In settimana: 12:00 - 01:00 | Weekend: 12:00 - 03:00" data-en="Weekdays: 12:00 PM - 01:00 AM | Weekend: 12:00 PM - 03:00 AM">In settimana: 12:00 - 01:00 | Weekend: 12:00 - 03:00</p>
                         </div>
 
                         <div class="info-item">
-                            <h5 class="info-label" data-it="CONTATTI & SOCIAL" data-en="CONTACTS & SOCIAL">CONTATTI & SOCIAL</h5>
+                            <h3 class="info-label" data-it="CONTATTI & SOCIAL" data-en="CONTACTS & SOCIAL">CONTATTI & SOCIAL</h3>
                             <p class="info-value">
                                 Email: <a href="mailto:amministrazione@dopaminaburger.it"
                                     class="info-link">amministrazione@dopaminaburger.it</a><br>
@@ -595,7 +615,7 @@
 
         <!-- Footer Graphic Illustration -->
         <div class="footer-graphic-container">
-            <img src="assets/smash-footer.png" alt="Dopamina Smash Illustration" class="footer-illustration">
+            <img src="assets/smash-footer.webp" alt="Dopamina Smash Illustration" class="footer-illustration" width="1931" height="548">
         </div>
     </main>
 
@@ -640,12 +660,24 @@
         </div>
     </div>
 
+    <!-- Promotional Popup Modal (Win a Free Burger) -->
+    <div id="promo-modal" class="promo-modal" aria-hidden="true" role="dialog">
+        <div class="promo-overlay" id="promo-overlay"></div>
+        <div class="promo-content">
+            <button class="promo-close-btn" id="promo-close" aria-label="Chiudi Finestra">&times;</button>
+            <div class="promo-inner">
+                <h2 class="promo-title" data-it="VUOI VINCERE UNA DOSE GRATUITA?" data-en="WANT TO WIN A FREE DOSE?">Vuoi vincere una dose gratuita?</h2>
+                <a href="contest.html" class="promo-cta-btn" data-it="SCOPRI COME" data-en="FIND OUT HOW">SCOPRI COME</a>
+            </div>
+        </div>
+    </div>
+
     <!-- Leaflet JS for custom monochrome map -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin="" defer></script>
 
     <!-- Core JS -->
-    <script src="index.js"></script>
+    <script src="index.min.js?v=2" defer></script>
 </body>
 
 </html>

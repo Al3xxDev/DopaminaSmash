@@ -43,6 +43,17 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // Helper function to calculate absolute offset top relative to the document
+    const getAbsoluteOffsetTop = (element) => {
+        let top = 0;
+        let curr = element;
+        while (curr) {
+            top += curr.offsetTop;
+            curr = curr.offsetParent;
+        }
+        return top;
+    };
+
     // ==========================================================================
     // 2. SCROLL SPY FOR HEADER NAV & MENU CATEGORY TABS
     // ==========================================================================
@@ -51,19 +62,39 @@ document.addEventListener('DOMContentLoaded', () => {
     const tabLinks = document.querySelectorAll('.tab-link');
     const menuCategories = document.querySelectorAll('.menu-category');
 
+    let isScrollingProgrammatically = false;
+    let scrollTimeout = null;
+
+    let cachedSectionPositions = [];
+    let cachedCategoryPositions = [];
+    let cachedHeaderHeight = 80;
+
+    function cacheLayoutValues() {
+        cachedHeaderHeight = document.querySelector('.sticky-header')?.offsetHeight || 80;
+        
+        cachedSectionPositions = Array.from(sections).map(section => ({
+            id: section.getAttribute('id'),
+            top: getAbsoluteOffsetTop(section),
+            height: section.offsetHeight
+        }));
+        
+        cachedCategoryPositions = Array.from(menuCategories).map(category => ({
+            id: category.getAttribute('id'),
+            top: getAbsoluteOffsetTop(category),
+            height: category.offsetHeight
+        }));
+    }
+
     function handleScrollSpy() {
-        const scrollPosition = window.scrollY + 120; // offset header height
+        if (isScrollingProgrammatically) return;
+        const scrollPosition = window.scrollY + cachedHeaderHeight + 25;
 
         // 2a. Header Links scrollspy
-        sections.forEach(section => {
-            const sectionTop = section.offsetTop;
-            const sectionHeight = section.offsetHeight;
-            const sectionId = section.getAttribute('id');
-
-            if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+        cachedSectionPositions.forEach(sec => {
+            if (scrollPosition >= sec.top && scrollPosition < sec.top + sec.height) {
                 navLinks.forEach(link => {
                     link.classList.remove('active');
-                    if (link.getAttribute('href') === `#${sectionId}`) {
+                    if (link.getAttribute('href') === `#${sec.id}`) {
                         link.classList.add('active');
                     }
                 });
@@ -71,15 +102,11 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         // 2b. Menu categories sticky tabs scrollspy
-        menuCategories.forEach(category => {
-            const categoryTop = category.offsetTop;
-            const categoryHeight = category.offsetHeight;
-            const categoryId = category.getAttribute('id');
-
-            if (scrollPosition >= categoryTop && scrollPosition < categoryTop + categoryHeight) {
+        cachedCategoryPositions.forEach(cat => {
+            if (scrollPosition >= cat.top && scrollPosition < cat.top + cat.height) {
                 tabLinks.forEach(tab => {
                     tab.classList.remove('active');
-                    if (tab.getAttribute('href') === `#${categoryId}`) {
+                    if (tab.getAttribute('href') === `#${cat.id}`) {
                         tab.classList.add('active');
                     }
                 });
@@ -87,8 +114,45 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // Populate initial layout cache and bind updates to resize and resources load events
+    cacheLayoutValues();
+    window.addEventListener('load', cacheLayoutValues);
+    window.addEventListener('resize', cacheLayoutValues);
+
     window.addEventListener('scroll', handleScrollSpy);
     handleScrollSpy(); // Trigger immediately on load
+
+    // ==========================================================================
+    // 2c. SMOOTH NAVIGATION FOR HEADER LINKS
+    // ==========================================================================
+    navLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            const href = link.getAttribute('href');
+            if (href && href.startsWith('#')) {
+                e.preventDefault();
+                const targetElement = document.querySelector(href);
+                if (targetElement) {
+                    isScrollingProgrammatically = true;
+                    const headerHeight = document.querySelector('.sticky-header')?.offsetHeight || 80;
+                    const offsetPosition = getAbsoluteOffsetTop(targetElement) - headerHeight;
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: 'smooth'
+                    });
+
+                    // Update active nav link immediately
+                    navLinks.forEach(l => l.classList.remove('active'));
+                    link.classList.add('active');
+
+                    if (scrollTimeout) clearTimeout(scrollTimeout);
+                    scrollTimeout = setTimeout(() => {
+                        isScrollingProgrammatically = false;
+                        handleScrollSpy();
+                    }, 800);
+                }
+            }
+        });
+    });
 
     // ==========================================================================
     // 3. SMOOTH NAVIGATION FOR TABS (MENU TABS)
@@ -100,17 +164,25 @@ document.addEventListener('DOMContentLoaded', () => {
             const targetCategory = document.querySelector(targetId);
             
             if (targetCategory) {
-                // Smooth scroll directly to the category section
-                const offsetPosition = targetCategory.offsetTop - 90;
+                isScrollingProgrammatically = true;
+                const headerHeight = document.querySelector('.sticky-header')?.offsetHeight || 80;
+                // Scroll directly to the category section, offsetting header height plus a 20px padding gap
+                const offsetPosition = getAbsoluteOffsetTop(targetCategory) - headerHeight - 20;
                 
                 window.scrollTo({
                     top: offsetPosition,
                     behavior: 'smooth'
                 });
                 
-                // Set active class
+                // Set active class immediately and lock scrollspy temporarily
                 tabLinks.forEach(t => t.classList.remove('active'));
                 tab.classList.add('active');
+
+                if (scrollTimeout) clearTimeout(scrollTimeout);
+                scrollTimeout = setTimeout(() => {
+                    isScrollingProgrammatically = false;
+                    handleScrollSpy();
+                }, 800);
             }
         });
     });
@@ -163,8 +235,19 @@ document.addEventListener('DOMContentLoaded', () => {
         });
         
         // Add marker to map
-        L.marker([latitude, longitude], { icon: customIcon }).addTo(map)
-            .bindPopup(`
+        const marker = L.marker([latitude, longitude], { 
+            icon: customIcon,
+            title: "Dopamina Smash Salerno"
+        }).addTo(map);
+
+        // Add aria-label and role for accessibility screen readers
+        const markerElem = marker.getElement();
+        if (markerElem) {
+            markerElem.setAttribute('aria-label', 'Dopamina Smash Salerno Map Marker');
+            markerElem.setAttribute('role', 'button');
+        }
+
+        marker.bindPopup(`
                 <div style="font-family: 'Space Mono', monospace; padding: 5px; color: #111111; text-align: center;">
                     <strong style="font-size: 14px; text-transform: uppercase; color: #E02020; display: block; margin-bottom: 2px;">Dopamina Smash</strong>
                     <span style="font-size: 11px; color: #555555; display: block; margin-bottom: 8px;">Piazza Flavio Gioia, 2 - Salerno</span>
@@ -191,32 +274,50 @@ document.addEventListener('DOMContentLoaded', () => {
     // 5. LANGUAGE SWITCHER (ITALIANO <-> ENGLISH)
     // ==========================================================================
     const langSwitchBtn = document.getElementById('lang-switch');
-    let currentLang = 'it';
+    let currentLang = localStorage.getItem('dopamina_lang') || 'it';
 
-    if (langSwitchBtn) {
-        langSwitchBtn.addEventListener('click', () => {
-            currentLang = currentLang === 'it' ? 'en' : 'it';
-            
-            // Toggle active state classes
-            if (currentLang === 'en') {
+    function applyLanguage(lang) {
+        currentLang = lang;
+        localStorage.setItem('dopamina_lang', lang);
+        document.documentElement.lang = lang;
+
+        if (langSwitchBtn) {
+            if (lang === 'en') {
                 langSwitchBtn.classList.add('eng-active');
                 langSwitchBtn.setAttribute('aria-label', 'Switch to Italian');
             } else {
                 langSwitchBtn.classList.remove('eng-active');
                 langSwitchBtn.setAttribute('aria-label', 'Switch to English');
             }
+        }
 
-            // Update text for all elements with data-it and data-en
-            const translatable = document.querySelectorAll('[data-it][data-en]');
-            translatable.forEach(el => {
-                const hasChildren = el.children.length > 0;
-                // If it contains tags we want to translate or handle HTML structure
-                if (hasChildren || el.innerHTML.includes('<')) {
-                    el.innerHTML = el.getAttribute(`data-${currentLang}`);
-                } else {
-                    el.textContent = el.getAttribute(`data-${currentLang}`);
-                }
-            });
+        // Update text for all elements with data-it and data-en
+        const translatable = document.querySelectorAll('[data-it][data-en]');
+        translatable.forEach(el => {
+            const hasChildren = el.children.length > 0;
+            // If it contains tags we want to translate or handle HTML structure
+            if (hasChildren || el.innerHTML.includes('<')) {
+                el.innerHTML = el.getAttribute(`data-${lang}`);
+            } else {
+                el.textContent = el.getAttribute(`data-${lang}`);
+            }
+            
+            // Handle aria-label translations if they exist in data attributes
+            const ariaIt = el.getAttribute('data-aria-it');
+            const ariaEn = el.getAttribute('data-aria-en');
+            if (ariaIt && ariaEn) {
+                el.setAttribute('aria-label', lang === 'en' ? ariaEn : ariaIt);
+            }
+        });
+    }
+
+    // Apply saved or default language on load
+    applyLanguage(currentLang);
+
+    if (langSwitchBtn) {
+        langSwitchBtn.addEventListener('click', () => {
+            const nextLang = currentLang === 'it' ? 'en' : 'it';
+            applyLanguage(nextLang);
         });
     }
 
@@ -259,11 +360,18 @@ document.addEventListener('DOMContentLoaded', () => {
                 
                 const targetElement = document.querySelector(href);
                 if (targetElement) {
-                    const offsetPosition = targetElement.offsetTop - 70; // Offset mobile header height
+                    isScrollingProgrammatically = true;
+                    const offsetPosition = getAbsoluteOffsetTop(targetElement) - 70; // Offset mobile header height
                     window.scrollTo({
                         top: offsetPosition,
                         behavior: 'smooth'
                     });
+
+                    if (scrollTimeout) clearTimeout(scrollTimeout);
+                    scrollTimeout = setTimeout(() => {
+                        isScrollingProgrammatically = false;
+                        handleScrollSpy();
+                    }, 800);
                 }
             });
         });
@@ -309,6 +417,61 @@ document.addEventListener('DOMContentLoaded', () => {
             if (e.key === 'Escape' && deliveryModal.classList.contains('modal-active')) {
                 closeModal();
             }
+        });
+    }
+
+    // ==========================================================================
+    // 8. PROMOTIONAL POPUP MODAL (WIN A FREE DOSE)
+    // ==========================================================================
+    const promoModal = document.getElementById('promo-modal');
+    const promoOverlay = document.getElementById('promo-overlay');
+    const promoClose = document.getElementById('promo-close');
+    const promoCta = document.querySelector('.promo-cta-btn');
+
+    if (promoModal && promoOverlay && promoClose) {
+        const closePromo = () => {
+            promoModal.classList.remove('modal-active');
+            // Only unlock scroll if delivery modal isn't also open
+            if (!deliveryModal || !deliveryModal.classList.contains('modal-active')) {
+                document.body.classList.remove('modal-open');
+            }
+        };
+
+        const openPromo = () => {
+            promoModal.classList.add('modal-active');
+            document.body.classList.add('modal-open');
+        };
+
+        // Close events
+        promoClose.addEventListener('click', closePromo);
+        promoOverlay.addEventListener('click', closePromo);
+        if (promoCta) {
+            promoCta.addEventListener('click', closePromo);
+        }
+
+        // Escape key close
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && promoModal.classList.contains('modal-active')) {
+                closePromo();
+            }
+        });
+
+        // Trigger after a 100ms delay on every page load
+        setTimeout(() => {
+            // Ensure we don't open it if the delivery modal is already active
+            if (!deliveryModal || !deliveryModal.classList.contains('modal-active')) {
+                openPromo();
+            }
+        }, 100);
+    }
+
+    // Defer hero video autoplay to decrease initial page weight
+    const heroVideo = document.getElementById('hero-burger');
+    if (heroVideo) {
+        window.addEventListener('load', () => {
+            heroVideo.play().catch((err) => {
+                console.warn("Hero video playback postponed/prevented:", err);
+            });
         });
     }
 });
