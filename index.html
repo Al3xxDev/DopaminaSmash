@@ -49,15 +49,10 @@
     <noscript><link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""></noscript>
 
     <!-- Preload custom local font to prevent layout shifts -->
-    <link rel="preload" href="assets/fonts/Sink-Regular.woff2" as="font" type="font/woff2" crossorigin>
-
-    <!-- Preload heavy background assets to prevent layout/visual flash -->
-    <link rel="preload" as="image" href="assets/bg-chat.webp">
-    <link rel="preload" as="image" href="assets/bg-popup.webp" fetchpriority="high">
+    <link rel="preload" href="/assets/fonts/Sink-Regular.woff2" as="font" type="font/woff2" crossorigin>
 
     <!-- Core CSS -->
-    <link rel="preload" href="index.min.css?v=2" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="index.min.css?v=2"></noscript>
+    <link rel="stylesheet" href="index.min.css?v=2">
 </head>
 
 <body>
@@ -640,7 +635,7 @@
     </div>
 
     <!-- Delivery Modal Popup -->
-    <div id="delivery-modal" class="delivery-modal" aria-hidden="true" role="dialog">
+    <div id="delivery-modal" class="delivery-modal" aria-hidden="true" role="dialog" inert>
         <div class="modal-overlay" id="modal-overlay"></div>
         <div class="modal-content">
             <button class="modal-close-btn" id="modal-close" aria-label="Chiudi Finestra">&times;</button>
@@ -664,7 +659,7 @@
     </div>
 
     <!-- Promotional Popup Modal (Win a Free Burger) -->
-    <div id="promo-modal" class="promo-modal" aria-hidden="true" role="dialog">
+    <div id="promo-modal" class="promo-modal" aria-hidden="true" role="dialog" inert>
         <div class="promo-overlay" id="promo-overlay"></div>
         <div class="promo-content">
             <button class="promo-close-btn" id="promo-close" aria-label="Chiudi Finestra">&times;</button>

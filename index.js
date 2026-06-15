@@ -388,12 +388,23 @@ document.addEventListener('DOMContentLoaded', () => {
     if (deliveryModal && modalOverlay && modalClose) {
         const openModal = (e) => {
             e.preventDefault();
+            openModal.focusedElementBeforeModal = document.activeElement;
+            deliveryModal.removeAttribute('inert');
             deliveryModal.classList.add('modal-active');
+            deliveryModal.setAttribute('aria-hidden', 'false');
             document.body.classList.add('modal-open');
+            setTimeout(() => modalClose.focus(), 50);
         };
 
         const closeModal = () => {
+            if (openModal.focusedElementBeforeModal && openModal.focusedElementBeforeModal !== document.body) {
+                openModal.focusedElementBeforeModal.focus();
+            } else if (document.activeElement) {
+                document.activeElement.blur();
+            }
             deliveryModal.classList.remove('modal-active');
+            deliveryModal.setAttribute('aria-hidden', 'true');
+            deliveryModal.setAttribute('inert', '');
             document.body.classList.remove('modal-open');
         };
 
@@ -430,7 +441,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (promoModal && promoOverlay && promoClose) {
         const closePromo = () => {
+            if (openPromo.focusedElementBeforeModal && openPromo.focusedElementBeforeModal !== document.body) {
+                openPromo.focusedElementBeforeModal.focus();
+            } else if (document.activeElement) {
+                document.activeElement.blur();
+            }
             promoModal.classList.remove('modal-active');
+            promoModal.setAttribute('aria-hidden', 'true');
+            promoModal.setAttribute('inert', '');
             // Only unlock scroll if delivery modal isn't also open
             if (!deliveryModal || !deliveryModal.classList.contains('modal-active')) {
                 document.body.classList.remove('modal-open');
@@ -438,8 +456,12 @@ document.addEventListener('DOMContentLoaded', () => {
         };
 
         const openPromo = () => {
+            openPromo.focusedElementBeforeModal = document.activeElement;
+            promoModal.removeAttribute('inert');
             promoModal.classList.add('modal-active');
+            promoModal.setAttribute('aria-hidden', 'false');
             document.body.classList.add('modal-open');
+            setTimeout(() => promoClose.focus(), 50);
         };
 
         // Close events
