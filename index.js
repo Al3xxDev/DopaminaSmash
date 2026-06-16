@@ -88,30 +88,51 @@ document.addEventListener('DOMContentLoaded', () => {
     function handleScrollSpy() {
         if (isScrollingProgrammatically) return;
         const scrollPosition = window.scrollY + cachedHeaderHeight + 25;
+        const isAtBottom = (window.innerHeight + window.scrollY) >= (document.documentElement.scrollHeight - 15);
 
         // 2a. Header Links scrollspy
-        cachedSectionPositions.forEach(sec => {
-            if (scrollPosition >= sec.top && scrollPosition < sec.top + sec.height) {
-                navLinks.forEach(link => {
-                    link.classList.remove('active');
-                    if (link.getAttribute('href') === `#${sec.id}`) {
-                        link.classList.add('active');
-                    }
-                });
-            }
-        });
+        if (isAtBottom && cachedSectionPositions.length > 0) {
+            const lastSecId = cachedSectionPositions[cachedSectionPositions.length - 1].id;
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${lastSecId}`) {
+                    link.classList.add('active');
+                }
+            });
+        } else {
+            cachedSectionPositions.forEach(sec => {
+                if (scrollPosition >= sec.top && scrollPosition < sec.top + sec.height) {
+                    navLinks.forEach(link => {
+                        link.classList.remove('active');
+                        if (link.getAttribute('href') === `#${sec.id}`) {
+                            link.classList.add('active');
+                        }
+                    });
+                }
+            });
+        }
 
         // 2b. Menu categories sticky tabs scrollspy
-        cachedCategoryPositions.forEach(cat => {
-            if (scrollPosition >= cat.top && scrollPosition < cat.top + cat.height) {
-                tabLinks.forEach(tab => {
-                    tab.classList.remove('active');
-                    if (tab.getAttribute('href') === `#${cat.id}`) {
-                        tab.classList.add('active');
-                    }
-                });
-            }
-        });
+        if (isAtBottom && cachedCategoryPositions.length > 0) {
+            const lastCatId = cachedCategoryPositions[cachedCategoryPositions.length - 1].id;
+            tabLinks.forEach(tab => {
+                tab.classList.remove('active');
+                if (tab.getAttribute('href') === `#${lastCatId}`) {
+                    tab.classList.add('active');
+                }
+            });
+        } else {
+            cachedCategoryPositions.forEach(cat => {
+                if (scrollPosition >= cat.top && scrollPosition < cat.top + cat.height) {
+                    tabLinks.forEach(tab => {
+                        tab.classList.remove('active');
+                        if (tab.getAttribute('href') === `#${cat.id}`) {
+                            tab.classList.add('active');
+                        }
+                    });
+                }
+            });
+        }
     }
 
     // Populate initial layout cache and bind updates to resize and resources load events

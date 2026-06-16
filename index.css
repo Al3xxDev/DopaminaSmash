@@ -511,11 +511,18 @@ section {
     transition: var(--transition-smooth);
 }
 
-.tab-link:hover,
 .tab-link.active {
     background-color: var(--color-text-main);
     color: var(--color-text-white);
     border-color: var(--color-text-main);
+}
+
+@media (hover: hover) {
+    .tab-link:hover {
+        background-color: var(--color-text-main);
+        color: var(--color-text-white);
+        border-color: var(--color-text-main);
+    }
 }
 
 /* Categories & Layout grid */
