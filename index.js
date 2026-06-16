@@ -573,10 +573,15 @@ document.addEventListener('DOMContentLoaded', () => {
     // Defer hero video autoplay to decrease initial page weight
     const heroVideo = document.getElementById('hero-burger');
     if (heroVideo) {
-        window.addEventListener('load', () => {
+        const startVideo = () => {
             heroVideo.play().catch((err) => {
                 console.warn("Hero video playback postponed/prevented:", err);
             });
-        });
+        };
+        
+        window.addEventListener('load', startVideo);
+        // Fallback: play on first user interaction if blocked by autoplay policy
+        document.addEventListener('touchstart', startVideo, { once: true });
+        document.addEventListener('click', startVideo, { once: true });
     }
 });
