@@ -190,84 +190,146 @@ document.addEventListener('DOMContentLoaded', () => {
     // ==========================================================================
     // 4. LEAFLET CUSTOM MONOCHROME MAP LOADING
     // ==========================================================================
+    // Helper to dynamically load external scripts and stylesheets
+    const loadResource = (url, type) => {
+        return new Promise((resolve, reject) => {
+            if (type === 'css') {
+                if (document.querySelector(`link[href="${url}"]`)) {
+                    resolve();
+                    return;
+                }
+                const link = document.createElement('link');
+                link.rel = 'stylesheet';
+                link.href = url;
+                link.onload = resolve;
+                link.onerror = reject;
+                document.head.appendChild(link);
+            } else {
+                if (document.querySelector(`script[src="${url}"]`)) {
+                    resolve();
+                    return;
+                }
+                const script = document.createElement('script');
+                script.src = url;
+                script.defer = true;
+                script.onload = resolve;
+                script.onerror = reject;
+                document.head.appendChild(script);
+            }
+        });
+    };
+
     const mapContainer = document.getElementById('map-container');
     if (mapContainer) {
-        // Salerno Piazza Flavio Gioia coordinates
-        const latitude = 40.67812;
-        const longitude = 14.76051;
-        
-        // Initialize Leaflet map
-        const map = L.map('map-container', {
-            scrollWheelZoom: false,
-            zoomControl: true
-        }).setView([latitude, longitude], 17);
-        
-        // Add monochrome Dark Matter CartoDB tiles
-        L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
-            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
-            subdomains: 'abcd',
-            maxZoom: 20
-        }).addTo(map);
-        
-        // Custom red pulse pin icon
-        const customIcon = L.divIcon({
-            className: 'custom-map-pin',
-            html: `
-                <div style="
-                    background-color: #E02020; 
-                    width: 14px; 
-                    height: 14px; 
-                    border-radius: 50%; 
-                    border: 2.5px solid #ffffff; 
-                    box-shadow: 0 0 10px rgba(224, 32, 32, 0.8);
-                    animation: pulseMarker 1.8s infinite;
-                "></div>
-                <style>
-                    @keyframes pulseMarker {
-                        0% { box-shadow: 0 0 0 0 rgba(224, 32, 32, 0.7); }
-                        70% { box-shadow: 0 0 0 10px rgba(224, 32, 32, 0); }
-                        100% { box-shadow: 0 0 0 0 rgba(224, 32, 32, 0); }
+        const initializeMap = () => {
+            // Salerno Piazza Flavio Gioia coordinates
+            const latitude = 40.67812;
+            const longitude = 14.76051;
+            
+            // Initialize Leaflet map
+            const map = L.map('map-container', {
+                scrollWheelZoom: false,
+                zoomControl: true
+            }).setView([latitude, longitude], 17);
+            
+            // Add monochrome Dark Matter CartoDB tiles
+            L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+                subdomains: 'abcd',
+                maxZoom: 20
+            }).addTo(map);
+            
+            // Custom red pulse pin icon
+            const customIcon = L.divIcon({
+                className: 'custom-map-pin',
+                html: `
+                    <div style="
+                        background-color: #E02020; 
+                        width: 14px; 
+                        height: 14px; 
+                        border-radius: 50%; 
+                        border: 2.5px solid #ffffff; 
+                        box-shadow: 0 0 10px rgba(224, 32, 32, 0.8);
+                        animation: pulseMarker 1.8s infinite;
+                    "></div>
+                    <style>
+                        @keyframes pulseMarker {
+                            0% { box-shadow: 0 0 0 0 rgba(224, 32, 32, 0.7); }
+                            70% { box-shadow: 0 0 0 10px rgba(224, 32, 32, 0); }
+                            100% { box-shadow: 0 0 0 0 rgba(224, 32, 32, 0); }
+                        }
+                    </style>
+                `,
+                iconSize: [14, 14],
+                iconAnchor: [7, 7]
+            });
+            
+            // Add marker to map
+            const marker = L.marker([latitude, longitude], { 
+                icon: customIcon,
+                title: "Dopamina Smash Salerno"
+            }).addTo(map);
+
+            // Add aria-label and role for accessibility screen readers
+            const markerElem = marker.getElement();
+            if (markerElem) {
+                markerElem.setAttribute('aria-label', 'Dopamina Smash Salerno Map Marker');
+                markerElem.setAttribute('role', 'button');
+            }
+
+            marker.bindPopup(`
+                    <div style="font-family: 'Space Mono', monospace; padding: 5px; color: #111111; text-align: center;">
+                        <strong style="font-size: 14px; text-transform: uppercase; color: #E02020; display: block; margin-bottom: 2px;">Dopamina Smash</strong>
+                        <span style="font-size: 11px; color: #555555; display: block; margin-bottom: 8px;">Piazza Flavio Gioia, 2 - Salerno</span>
+                        <a href="https://maps.app.goo.gl/NZU2qP6i4Zhkw6R87" target="_blank" rel="noopener noreferrer" style="
+                            display: inline-block;
+                            background-color: #E02020;
+                            color: #ffffff;
+                            padding: 6px 12px;
+                            font-size: 10px;
+                            font-weight: 700;
+                            text-transform: uppercase;
+                            border-radius: 4px;
+                            text-decoration: none;
+                            transition: background-color 0.2s ease;
+                        " onmouseover="this.style.backgroundColor='#C01010'" onmouseout="this.style.backgroundColor='#E02020'">
+                            Apri in Google Maps
+                        </a>
+                    </div>
+                `)
+                .openPopup();
+        };
+
+        const loadMap = async () => {
+            if (loadMap.loaded) return;
+            loadMap.loaded = true;
+            try {
+                await Promise.all([
+                    loadResource('https://unpkg.com/leaflet@1.9.4/dist/leaflet.css', 'css'),
+                    loadResource('https://unpkg.com/leaflet@1.9.4/dist/leaflet.js', 'js')
+                ]);
+                initializeMap();
+            } catch (err) {
+                console.error("Failed to load Leaflet resources:", err);
+                loadMap.loaded = false;
+            }
+        };
+
+        if ('IntersectionObserver' in window) {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        loadMap();
+                        observer.unobserve(mapContainer);
                     }
-                </style>
-            `,
-            iconSize: [14, 14],
-            iconAnchor: [7, 7]
-        });
-        
-        // Add marker to map
-        const marker = L.marker([latitude, longitude], { 
-            icon: customIcon,
-            title: "Dopamina Smash Salerno"
-        }).addTo(map);
-
-        // Add aria-label and role for accessibility screen readers
-        const markerElem = marker.getElement();
-        if (markerElem) {
-            markerElem.setAttribute('aria-label', 'Dopamina Smash Salerno Map Marker');
-            markerElem.setAttribute('role', 'button');
+                });
+            }, {
+                rootMargin: '200px'
+            });
+            observer.observe(mapContainer);
+        } else {
+            window.addEventListener('load', loadMap);
         }
-
-        marker.bindPopup(`
-                <div style="font-family: 'Space Mono', monospace; padding: 5px; color: #111111; text-align: center;">
-                    <strong style="font-size: 14px; text-transform: uppercase; color: #E02020; display: block; margin-bottom: 2px;">Dopamina Smash</strong>
-                    <span style="font-size: 11px; color: #555555; display: block; margin-bottom: 8px;">Piazza Flavio Gioia, 2 - Salerno</span>
-                    <a href="https://maps.app.goo.gl/NZU2qP6i4Zhkw6R87" target="_blank" rel="noopener noreferrer" style="
-                        display: inline-block;
-                        background-color: #E02020;
-                        color: #ffffff;
-                        padding: 6px 12px;
-                        font-size: 10px;
-                        font-weight: 700;
-                        text-transform: uppercase;
-                        border-radius: 4px;
-                        text-decoration: none;
-                        transition: background-color 0.2s ease;
-                    " onmouseover="this.style.backgroundColor='#C01010'" onmouseout="this.style.backgroundColor='#E02020'">
-                        Apri in Google Maps
-                    </a>
-                </div>
-            `)
-            .openPopup();
     }
 
     // ==========================================================================
